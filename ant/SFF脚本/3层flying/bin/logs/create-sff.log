@@ -1,0 +1,1053 @@
+Buildfile: ../xml/build.xml
+
+init:
+
+init-sff:
+    [echo2] Time:Thu Mar 12 20:06:33 MST 2015
+    [echo2] sff 环境初始化...
+    [echo2] Time:Thu Mar 12 20:06:33 MST 2015
+    [echo2] sff 完成环境初始化!
+
+compile-sff:
+     [echo] sff 开始编译...
+
+init:
+
+clean-ant-create:
+    [echo2] Time:Thu Mar 12 20:06:33 MST 2015
+    [echo2] 清除临时目录...
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/ailmmsff/tmp/sff
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/ailmmsff/dest/sff
+    [mkdir] Created dir: /home/ailmmsff/dest/sff
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/classes
+    [echo2] Time:Thu Mar 12 20:06:34 MST 2015
+    [echo2] 清除临时目录完成!
+
+compile:
+
+jenkins:
+
+manual:
+    [echo2] Time:Thu Mar 12 20:06:34 MST 2015
+    [echo2] 开始编译java文件...../svn/sff
+    [javac] Compiling 655 source files to /home/ailmmsff/tmp/sff/classes
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+     [copy] Copying 99 files to /home/ailmmsff/tmp/sff/classes/com/ai/oss/tn/sf/inter/sys/test
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff.jar
+    [echo2] Time:Thu Mar 12 20:06:43 MST 2015
+    [echo2] 编译java文件完成!
+
+taskdefine:
+Trying to override old definition of task jspc
+
+pre_create_process:
+    [echo2] Time:Thu Mar 12 20:06:44 MST 2015
+    [echo2] 开始预先生成process的java代码
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process/tmp
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process/src
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process/classes
+      [jar] Building jar: /home/ailmmsff/tmp/sff/process/tmp/process_wvm.jar
+[PreCreateProcess] [2015-03-12 20:06:45,526] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the Session Manager:com.ai.appframe2.complex.transaction.impl.LocalMutilTransactionImpl
+[PreCreateProcess] [2015-03-12 20:06:45,531] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the Data Type Manager:com.ai.appframe2.bo.ObjectTypeFactoryFromFileImpl
+[PreCreateProcess] [2015-03-12 20:06:45,543] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the object unique identifier Manager:com.ai.appframe2.complex.tab.id.AdvanceIdGeneratorImpl
+[PreCreateProcess] [2015-03-12 20:06:45,547] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the RowSet Manager:com.ai.appframe2.set.GenFieldTypeSetFactoryImpl
+[PreCreateProcess] [2015-03-12 20:06:45,555] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the enumeration data Manager:com.ai.appframe2.listdatasource.UIDataSourceFactory
+[PreCreateProcess] [2015-03-12 20:06:45,568] [main] () (AppframeLocaleFactory.java:63) ERROR com.ai.appframe2.bo.DataStoreImpl - appframe.jdbc.resultset_level=0
+[PreCreateProcess] [2015-03-12 20:06:45,592] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the data Storage Manager:com.ai.sfframe.commons.complex.table.store.UserDataStoreImpl
+[PreCreateProcess] [2015-03-12 20:06:45,593] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Main page URL to initialize the framework of a successful landing:/webframe/index.jsp
+[PreCreateProcess] [2015-03-12 20:06:45,594] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page logout URL:/webframe/Loginout.jsp
+[PreCreateProcess] [2015-03-12 20:06:45,594] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page login URL :/index.jsp
+[PreCreateProcess] [2015-03-12 20:06:45,594] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page login URL :/index.jsp
+[PreCreateProcess] ) (AppframeLocaleFactory.java:63) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - Default locale is en_US
+[PreCreateProcess] [2015-03-12 20:06:45,596] [main] () (AppframeLocaleFactory.java:86) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - LOCALE is not fixed
+[PreCreateProcess] [2015-03-12 20:06:45,599] [main] () (AppframeLocaleFactory.java:120) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - PREF_LANGUAGE is enable
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.FixedLine_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.Mobile_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.Mobile_Internal_TT......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.bak.CDMA_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.bak.FixedLine_Complaint(OLD)......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.bak.GSM_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.bak.Internal_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sa.bak.Mobile_Complaint......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.cancel.Cancel_Account......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.cancel.Cancel_AccountRemove......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.cancel.Cancel_ResourceAllocation......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.cancel.Cancel_Start......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddressCust_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddressCust_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddressCust_change_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddressCust_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddress_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddress_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddress_change_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeAddress_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeLineSpeed_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeLineSpeed_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeLineSpeed_change_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.ChangeLineSpeed_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLNew_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLNew_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLNew_change_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLNew_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLTermination_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLTermination_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.DSLTermination_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelOrderTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelOrder_colocationJudge......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelSessionTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancelSession_colocationJudge......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancel_cancelOrder_cancelOrderTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancel_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancel_cancelResource_cancelOrderTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancel_cancelSession_cancelOrderTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Exception_cancel_returnCRM......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.GlobalIP_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.GlobalIP_change_cancelResource......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.Provision_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPNew_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPNew_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPNew_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPTermination_change......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPTermination_change_cancelOrder......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.exception.VOIPTermination_change_cancelSession......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.Outside_Survey......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_B2BPre-Q......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeAddress......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeAddressCust......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeLineSpeed......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeOwnship......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeRouter......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_ChangeVoipAddon......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_DSLNew......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_DSLNew_TDC......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_DSLTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_DeProvision......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_GlobalIPAddon......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_GlobalIPPlusAddon......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Pre-Q......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Pre-V-ChangeAddress......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Pre-V-ChangeLineSpeed......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Pre-V-Decision......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Pre-V......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_Provision......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_TDCTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_VOIPNew......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.boardband.Broadband_VOIPTermination......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.fixedline.FixedLine_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.fixedline.FixedLine_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.fixedline.FixedLine_Transfer......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.ADSL_FromADSL......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.ADSL_IPBased_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.ADSL_IPBased_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.CapabilityEstimation......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.DSL_Circuit_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.DSL_Circuit_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.DSL_IPBased_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.DSL_IPBased_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.E1_Circuit_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.E1_Circuit_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.E1_IPBased_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.E1_IPBased_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Fiber_Circuit_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Fiber_Circuit_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Fiber_IPBased_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Fiber_IPBased_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Radio_IPBased_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.leaseline.Radio_IPBased_Disconn......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.vsat.VSAT_Add......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.vsat.VSAT_Connection......
+[PreCreateProcess] There are no java files generated according to the template file named:template.sf.normal.vsat.VSAT_Disconnection......
+      [jar] Building MANIFEST-only jar: /home/ailmmsff/dest/sff/pre_process.jar
+      [jar] Building jar: /home/ailmmsff/dest/sff/pre_process.jar
+     [copy] Copying 1 file to /home/ailmmsff/svn/sff/lib
+    [echo2] Time:Thu Mar 12 20:06:46 MST 2015
+    [echo2] 生成process的java代码完成
+
+create:
+
+app-flying:
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/flying-src
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/flying-classes/META-INF/flyingserver
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/flying-config
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-web
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-web/sff_app_web.war
+    [echo2] Time:Thu Mar 12 20:06:46 MST 2015
+    [echo2] 产生使用SV方式的flying...
+[FlyingGenerator] [2015-03-12 20:06:46,818] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the Session Manager:com.ai.appframe2.complex.transaction.impl.LocalMutilTransactionImpl
+[FlyingGenerator] [2015-03-12 20:06:46,822] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the Data Type Manager:com.ai.appframe2.bo.ObjectTypeFactoryFromFileImpl
+[FlyingGenerator] [2015-03-12 20:06:46,834] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the object unique identifier Manager:com.ai.appframe2.complex.tab.id.AdvanceIdGeneratorImpl
+[FlyingGenerator] [2015-03-12 20:06:46,838] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the RowSet Manager:com.ai.appframe2.set.GenFieldTypeSetFactoryImpl
+[FlyingGenerator] [2015-03-12 20:06:46,846] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the enumeration data Manager:com.ai.appframe2.listdatasource.UIDataSourceFactory
+[FlyingGenerator] [2015-03-12 20:06:46,858] [main] () (AppframeLocaleFactory.java:63) ERROR com.ai.appframe2.bo.DataStoreImpl - appframe.jdbc.resultset_level=0
+[FlyingGenerator] [2015-03-12 20:06:46,882] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Initialize the data Storage Manager:com.ai.sfframe.commons.complex.table.store.UserDataStoreImpl
+[FlyingGenerator] [2015-03-12 20:06:46,882] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Main page URL to initialize the framework of a successful landing:/webframe/index.jsp
+[FlyingGenerator] [2015-03-12 20:06:46,883] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page logout URL:/webframe/Loginout.jsp
+[FlyingGenerator] [2015-03-12 20:06:46,884] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page login URL :/index.jsp
+[FlyingGenerator] [2015-03-12 20:06:46,884] [main] () (AppframeLocaleFactory.java:63) DEBUG com.ai.appframe2.common.BaseSessionManager - Successful initial page login URL :/index.jsp
+[FlyingGenerator] ) (AppframeLocaleFactory.java:63) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - Default locale is en_US
+[FlyingGenerator] [2015-03-12 20:06:46,885] [main] () (AppframeLocaleFactory.java:86) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - LOCALE is not fixed
+[FlyingGenerator] [2015-03-12 20:06:46,889] [main] () (AppframeLocaleFactory.java:120) ERROR com.ai.appframe2.util.locale.AppframeLocaleFactory - PREF_LANGUAGE is enable
+[FlyingGenerator] Generate Flying services through interfaces with a name ends with SV.
+[FlyingGenerator] [2015-03-12 20:06:46,974] [main] () (LocalServiceInvokeImpl.java:104) ERROR com.ai.appframe2.complex.service.impl.LocalServiceInvokeImpl - CHECK_DAO_IN_SERVICE level:0
+[FlyingGenerator] [2015-03-12 20:06:46,979] [main] () (JMXConfigure.java:41) INFO  com.ai.appframe2.complex.mbean.JMXConfigure - JMX feature enabled
+[FlyingGenerator] [2015-03-12 20:06:46,983] [main] () (MBeanRegistryFactory.java:56) INFO  com.ai.appframe2.complex.mbean.MBeanRegistryFactory - The JMX register class is:com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl@257ccb2f
+[FlyingGenerator] [2015-03-12 20:06:46,997] [main] () (AbstractMBeanRegistryImpl.java:46) DEBUG com.ai.appframe2.complex.mbean.registry.AbstractMBeanRegistryImpl - The version of JDK is later than jdk1.4
+[FlyingGenerator] [2015-03-12 20:06:47,105] [main] () (LocalMBeanRegistryImpl.java:116) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - The JMX service url is :service:jmx:rmi://localhost/jndi/rmi://10.11.20.101:9999/jmxconnector
+[FlyingGenerator] [2015-03-12 20:06:47,112] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=JVM5Monitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,116] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=SystemMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,123] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=CacheMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,127] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=AppframeCacheMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,131] [main] () (LocalMBeanRegistryImpl.java:134) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - MBean(Remote):appframe:name=ActionMonitor has enabled.
+[FlyingGenerator] [2015-03-12 20:06:47,134] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=ActionMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,140] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=AppframeSessionMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,151] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=DataSourceMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,156] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=Log4jCategory successfully
+[FlyingGenerator] [2015-03-12 20:06:47,162] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=SQLMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,170] [main] () (SVMethodMonitor.java:77) ERROR com.ai.appframe2.complex.mbean.standard.sv.SVMethodMonitor - srv log disable
+[FlyingGenerator] [2015-03-12 20:06:47,175] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=SVMethodMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,180] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=TransactionMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,183] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=AppTraceMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,187] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):appframe:name=WebTraceMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,190] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):comframe:name=QueueMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,197] [main] () (LocalMBeanRegistryImpl.java:141) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - Register MBean(Remote):sfframe:name=SfframeQMonitor successfully
+[FlyingGenerator] [2015-03-12 20:06:47,523] [main] () (LocalMBeanRegistryImpl.java:171) INFO  com.ai.appframe2.complex.mbean.registry.LocalMBeanRegistryImpl - JMX(Remote) has started:{0}
+[FlyingGenerator] [2015-03-12 20:06:47,524] [main] () (DefaultMatchServiceNameBuilderFactory.java:21) DEBUG com.ai.appframe2.complex.service.impl.DefaultMatchServiceNameBuilderFactory - the system use DefaultServiceNameBuilderImpl
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.tn.res.inter.crminter.service.impl.ResCrmServerSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:510)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.tn.res.inter.crminter.service.impl.ResCrmServerSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] There are 76  Flying service successfully generated
+    [echo2] Time:Thu Mar 12 20:06:48 MST 2015
+    [echo2] 产生使用配置文件方式的flying...
+[FlyingGenerator] Generate Flying services through the configuration file
+[FlyingGenerator] There are 14  Flying service successfully generated
+    [echo2] Time:Thu Mar 12 20:06:48 MST 2015
+    [echo2] 采用搜索jar文件方式生成flying...
+[FlyingGenerator] Generate Flying services through searching jar files
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.commons.cust.plugin.impl.EventRsSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.commons.cust.plugin.impl.EventRsSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.commons.cust.plugin.impl.ExceptionFilterSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.commons.cust.plugin.impl.ExceptionFilterSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.commons.param.service.impl.ParamSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.commons.param.service.impl.ParamSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.area.address.service.impl.StandardAddrSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.area.address.service.impl.StandardAddrSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.IpSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.IpSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.LogicNumberSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.LogicNumberSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.LogicPortSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.LogicPortSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.PhysicNumberSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.PhysicNumberSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.VlanIdSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.logic.service.impl.VlanIdSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.physic.eqpt.service.impl.BoardSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.physic.eqpt.service.impl.BoardSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.EqptVlanRelSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.EqptVlanRelSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.PortNumberRelSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.PortNumberRelSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.ResEntityRelSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.oss.res.inventory.relate.service.impl.ResEntityRelSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.sf.basemgmt.cust.plugin.exception.impl.SfExceHandlerSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.sf.basemgmt.cust.plugin.exception.impl.SfExceHandlerSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.crm.service.impl.SfCrmClientSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.crm.service.impl.SfCrmClientSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.region.service.impl.RegionConvertSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.region.service.impl.RegionConvertSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.rm.service.impl.SfRmClientSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.rm.service.impl.SfRmClientSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.RuntimeException: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.wf.service.impl.SfWfClientSVImpl
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:45)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: com.ai.sfframe.sf.inter.sys.wf.service.impl.SfWfClientSVImpl
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	... 25 more
+[FlyingGenerator] generator src error:java.lang.NoClassDefFoundError: org/codehaus/jackson/map/ObjectMapper
+[FlyingGenerator] 	at com.ai.secframe.extend.service.impl.Sec2PeripherlSysFSVImpl.<clinit>(Sec2PeripherlSysFSVImpl.java:48)
+[FlyingGenerator] 	at java.lang.Class.forName0(Native Method)
+[FlyingGenerator] 	at java.lang.Class.forName(Class.java:171)
+[FlyingGenerator] 	at com.ai.appframe2.complex.service.impl.AbstractServiceNameBuilder.createSpecialService(AbstractServiceNameBuilder.java:43)
+[FlyingGenerator] 	at com.ai.appframe2.complex.util.MiscHelper.getImplClassByInterClassName(MiscHelper.java:62)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.createFlying(FlyingGeneratorAntTask.java:472)
+[FlyingGenerator] 	at com.ai.appframe2.complex.ant.FlyingGeneratorAntTask.execute(FlyingGeneratorAntTask.java:684)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:420)
+[FlyingGenerator] 	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:306)
+[FlyingGenerator] 	at org.apache.tools.ant.Task.perform(Task.java:401)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.execute(Target.java:338)
+[FlyingGenerator] 	at org.apache.tools.ant.Target.performTasks(Target.java:365)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTarget(Project.java:1237)
+[FlyingGenerator] 	at org.apache.tools.ant.Project.executeTargets(Project.java:1094)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.runBuild(Main.java:669)
+[FlyingGenerator] 	at org.apache.tools.ant.Main.startAnt(Main.java:220)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:215)
+[FlyingGenerator] 	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:90)
+[FlyingGenerator] Caused by: java.lang.ClassNotFoundException: org.codehaus.jackson.map.ObjectMapper
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClassInComponents(AntClassLoader.java:1187)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.findClass(AntClassLoader.java:1128)
+[FlyingGenerator] 	at org.apache.tools.ant.AntClassLoader.loadClass(AntClassLoader.java:998)
+[FlyingGenerator] 	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+[FlyingGenerator] 	... 29 more
+[FlyingGenerator] There are 373  Flying service successfully generated
+    [echo2] Time:Thu Mar 12 20:06:53 MST 2015
+    [echo2] 产生flying的配置文件...
+     [copy] Copying 1 file to /home/ailmmsff/tmp/sff/flying-classes/META-INF/flyingserver
+     [copy] Copying 1 file to /home/ailmmsff/tmp/sff/flying-classes/META-INF/flyingserver
+    [javac] Compiling 1359 source files to /home/ailmmsff/tmp/sff/flying-classes
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_flying.jar
+     [copy] Copying 7 files to /home/ailmmsff/tmp/sff/app-web/sff_app_web.war
+
+app-ear:
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 257 files to /home/ailmmsff/tmp/sff/flying-config
+     [move] Moving 1 files to /home/ailmmsff/tmp/sff/flying-config
+     [move] Moving 1 files to /home/ailmmsff/tmp/sff/flying-config
+    [echo2] Time:Thu Mar 12 20:07:03 MST 2015
+    [echo2] 开始生成中心配置文件...
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 257 files to /home/ailmmsff/tmp/sff/flying-config_0
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 7 files to /home/ailmmsff/tmp/sff/flying-config_0
+      [jar] Building jar: /home/ailmmsff/tmp/sff/flying-config/config_0.jar
+     [copy] Copying 1 file to /home/ailmmsff/dest/sff
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_app_0.ear
+
+app-war:
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war/WEB-INF/src
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war/WEB-INF/jsp-bak
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 3763 files to /home/ailmmsff/tmp/sff/app-war
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 17 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 23 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 18 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 31 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 3 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 6 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 2 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 257 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 10 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+      [jar] Building jar: /home/ailmmsff/tmp/sff/app-war/WEB-INF/lib/config.jar
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+    [echo2] Time:Thu Mar 12 20:07:12 MST 2015
+    [echo2] 开始预编译jsp
+     [jspc] log4j:WARN No appenders could be found for logger (org.apache.jasper.JspC).
+     [jspc] log4j:WARN Please initialize the log4j system properly.
+    [javac] Compiling 1188 source files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/classes
+    [javac] Note: /home/ailmmsff/tmp/sff/app-war/WEB-INF/src/org/apache/jsp/sf/bomgmt/template/pagecmpt/servorder/SfSubProdInfo_jsp.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+    [echo2] Time:Thu Mar 12 20:07:46 MST 2015
+    [echo2] 预编译jsp完成
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/ailmmsff/tmp/sff/app-war/WEB-INF/src
+     [move] Moving 1205 files to /home/ailmmsff/tmp/sff/app-war/WEB-INF/jsp-bak
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_web.war
+
+process-jar:
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process-lib
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process-config
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process-dist
+    [mkdir] Created dir: /home/ailmmsff/tmp/sff/process-configext
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 123 files to /home/ailmmsff/tmp/sff/process-lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 2 files to /home/ailmmsff/tmp/sff/process-lib
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 257 files to /home/ailmmsff/tmp/sff/process-config
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 257 files to /home/ailmmsff/tmp/sff/process-configext
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 10 files to /home/ailmmsff/tmp/sff/process-configext
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_lib.jar
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_config.jar
+      [jar] Building jar: /home/ailmmsff/dest/sff/sff_configext.jar
+    [echo2] Time:Thu Mar 12 20:08:12 MST 2015
+    [echo2] build-pre编译代码完成！
+     [echo] sff 完成编译...
+
+BUILD SUCCESSFUL
+Total time: 1 minute 39 seconds

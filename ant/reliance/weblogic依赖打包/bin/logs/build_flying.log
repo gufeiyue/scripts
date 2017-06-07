@@ -1,0 +1,28 @@
+Buildfile: /home/aiveris7/work/reliance-pit/xml/flying/build.xml
+
+init:
+     [echo] 基础构建打包呵呵
+
+compile:
+
+init:
+     [echo] env init by buildnv.properties ...
+     [echo] 初始化环境完成
+
+clean-ant-create:
+     [echo] 清除临时目录...
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/aiveris7/work/reliance-pit/dest/ootb
+  [deltree] DEPRECATED - The deltree task is deprecated.  Use delete instead.
+  [deltree] Deleting: /home/aiveris7/work/reliance-pit/tmp/ootb
+    [mkdir] Created dir: /home/aiveris7/work/reliance-pit/tmp/ootb
+    [mkdir] Created dir: /home/aiveris7/work/reliance-pit/tmp/ootb/classes
+    [mkdir] Created dir: /home/aiveris7/work/reliance-pit/dest/ootb/common
+    [mkdir] Created dir: /home/aiveris7/work/reliance-pit/dest/ootb/all_dest_lib
+    [mkdir] Created dir: /home/aiveris7/work/reliance-pit/dest/ootb/all_domain_lib
+     [echo] 清除临时目录完成
+
+copy:
+
+copyaction:
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.

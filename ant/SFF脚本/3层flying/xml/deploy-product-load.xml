@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-product-load" default="show" basedir=".">
+		<target name="show"  description="show">
+			<echo message="product-load部署"/>			
+		</target>
+
+		<target name="deploy-product-load"  description="deploy-product-load">
+			<echo2 message="开始部署product-load进程的操作..."/>			
+
+    	<echo2 message="执行发布脚本(${product_load_1.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${product_load_1.ssh.username}@${product_load_1.ssh.host}:/${product_load_1.path}/ftpdir" password="${product_load_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${product_load_1.ssh.username}@${product_load_1.ssh.host}:/${product_load_1.path}/ftpdir" password="${product_load_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_product_load_configext.jar" todir="${product_load_1.ssh.username}@${product_load_1.ssh.host}:/${product_load_1.path}/ftpdir" password="${product_load_1.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${product_load_1.ssh.host}"	port="${product_load_1.ssh.port}" username="${product_load_1.ssh.username}"  password="${product_load_1.ssh.password}" trust="true"	command="cd ${product_load_1.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+    	<echo2 message="执行发布脚本(${product_load_2.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${product_load_2.ssh.username}@${product_load_2.ssh.host}:/${product_load_2.path}/ftpdir" password="${product_load_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${product_load_2.ssh.username}@${product_load_2.ssh.host}:/${product_load_2.path}/ftpdir" password="${product_load_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_product_load_configext.jar" todir="${product_load_2.ssh.username}@${product_load_2.ssh.host}:/${product_load_2.path}/ftpdir" password="${product_load_2.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${product_load_2.ssh.host}"	port="${product_load_2.ssh.port}" username="${product_load_2.ssh.username}"  password="${product_load_2.ssh.password}" trust="true"	command="cd ${product_load_2.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>			
+
+
+    	<echo2 message="执行发布脚本(${product_load_3.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${product_load_3.ssh.username}@${product_load_3.ssh.host}:/${product_load_3.path}/ftpdir" password="${product_load_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${product_load_3.ssh.username}@${product_load_3.ssh.host}:/${product_load_3.path}/ftpdir" password="${product_load_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_product_load_configext.jar" todir="${product_load_3.ssh.username}@${product_load_3.ssh.host}:/${product_load_3.path}/ftpdir" password="${product_load_3.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${product_load_3.ssh.host}"	port="${product_load_3.ssh.port}" username="${product_load_3.ssh.username}"  password="${product_load_3.ssh.password}" trust="true"	command="cd ${product_load_3.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+    	<echo2 message="执行发布脚本(${product_load_4.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${product_load_4.ssh.username}@${product_load_4.ssh.host}:/${product_load_4.path}/ftpdir" password="${product_load_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${product_load_4.ssh.username}@${product_load_4.ssh.host}:/${product_load_4.path}/ftpdir" password="${product_load_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_product_load_configext.jar" todir="${product_load_4.ssh.username}@${product_load_4.ssh.host}:/${product_load_4.path}/ftpdir" password="${product_load_4.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${product_load_4.ssh.host}"	port="${product_load_4.ssh.port}" username="${product_load_4.ssh.username}"  password="${product_load_4.ssh.password}" trust="true"	command="cd ${product_load_4.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+		</target>
+</project>

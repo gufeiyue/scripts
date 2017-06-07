@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="crm" default="init" basedir=".">
+	<target name="init" description="初始化路径">
+	<taskdef name="PreCreateProcess" classname="com.ai.appframe2.complex.ant.PreCreateProcessTask">
+		<classpath>
+		<pathelement path="../svn/crm/config" />
+	<!--		<fileset dir="../svn/CRM_6.0/nWeb662/lib" includes="**/*.jar"/>-->
+		<fileset dir="../lib" includes="**/*.jar"/>
+		<fileset dir="../svn/crm/lib" includes="*.jar"/>								
+		<fileset dir="../dest/crm" includes="*.jar"/>
+		</classpath>
+	</taskdef>
+	<!-- <jar jarfile="process_wvm.jar">
+	 	
+	  	<fileset dir="../svn/crm/config">
+	   		<include name="**/*.wvm"/>
+	  	</fileset>
+	  	
+	</jar> -->
+	<PreCreateProcess destPath="/home/aiveris/work/veris662-sr0.2-rd-dev-ejb/xml/process/src" 
+						processEngineImplClassName="com.ai.comframe.vm.processflow.ProcessEnginePreCompileImpl"  workflowTemplateClassName="com.ai.comframe.vm.template.WorkflowTemplate">
+		<fileset dir="." includes="process_wvm.jar"/>
+    </PreCreateProcess>
+	
+	<!-- <PreCreateProcess destPath="${pro.tmp.path}/process/src"
+                        processEngineImplClassName="com.ai.comframe.vm.processflow.ProcessEnginePreCompileImpl"
+                        workflowTemplateClassName="com.ai.comframe.vm.template.WorkflowTemplate">
+         
+         <fileset dir="${pro.tmp.path}/process/tmp" includes="*.jar" /> 
+      </PreCreateProcess>  -->
+    <javac	srcdir="/home/aiveris/work/veris662-sr0.2-rd-dev-ejb/xml/process/src" destdir="/home/aiveris/work/veris662-sr0.2-rd-dev-ejb/xml/process/classes" debug="on" debuglevel="lines,vars,source" nowarn="true" failonerror="true" includeantruntime="on">
+    	<classpath> 
+			<fileset dir="../dest/crm" includes="*.jar"/>	
+			<fileset dir="../svn/crm/lib" includes="*.jar"/>
+	    </classpath>
+    	<include name="**/*.*"/>
+    </javac>
+    </target>
+</project>

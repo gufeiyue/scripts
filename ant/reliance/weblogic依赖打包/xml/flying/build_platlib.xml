@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="build_hub" default="usage" basedir=".">
+
+    <description>sessionmanager打包</description>
+   
+    <property environment="env" />
+    <property file="buildnv.properties"/>
+    
+    <property name="project_name" value="platlib"/>
+    <property name="project.common.lib.path" value="${project.dest.dir}/common"/>
+ 		
+    <target name="clean-ant-create"  description="清除临时目录">
+        <echo message="清除临时目录..."/>
+
+        <deltree dir="${project.tmp.code.path}"/>
+        
+        <echo message="清除临时目录完成"/>
+    </target>
+    
+        
+    <!-- 针对集成域工程达成EAR包 -->
+    <target name="compile" depends="clean-ant-create" description="hub ear 打包">
+				<jar jarfile="${project.dest.dir}/ear/${project_name}.ear">
+					<fileset dir="${project.appengine.lib.path}">
+						<include name="**/*.jar"/>
+					</fileset>
+				</jar>
+				
+				<!--
+				<delete includeEmptyDirs="true">
+    			<fileset dir="${project.dest.dir}" includes="**/*.jar"/>
+   			</delete>
+   			-->
+				
+    </target>
+
+    <target name="usage"  description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

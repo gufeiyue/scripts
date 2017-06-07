@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-msg" default="show" basedir=".">
+		<target name="show"  description="show">
+			<echo message="msg的进程部署"/>
+		</target>
+
+		<target name="deploy-msg"   description="deploy-msg">
+			<echo2 message="开始部署msg进程的操作..."/>
+
+
+    	<echo2 message="执行发布脚本(${msg_srv_1.ssh.host})..."/>    	
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${msg_srv_1.ssh.username}@${msg_srv_1.ssh.host}:/${msg_srv_1.path}/ftpdir" password="${msg_srv_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${msg_srv_1.ssh.username}@${msg_srv_1.ssh.host}:/${msg_srv_1.path}/ftpdir" password="${msg_srv_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_msg_configext.jar" todir="${msg_srv_1.ssh.username}@${msg_srv_1.ssh.host}:/${msg_srv_1.path}/ftpdir" password="${msg_srv_1.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${msg_srv_1.ssh.host}"	port="${msg_srv_1.ssh.port}" username="${msg_srv_1.ssh.username}"  password="${msg_srv_1.ssh.password}" trust="true"	command="cd ${msg_srv_1.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+    	<echo2 message="执行发布脚本(${msg_srv_2.ssh.host})..."/>    	
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${msg_srv_2.ssh.username}@${msg_srv_2.ssh.host}:/${msg_srv_2.path}/ftpdir" password="${msg_srv_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${msg_srv_2.ssh.username}@${msg_srv_2.ssh.host}:/${msg_srv_2.path}/ftpdir" password="${msg_srv_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_msg_configext.jar" todir="${msg_srv_2.ssh.username}@${msg_srv_2.ssh.host}:/${msg_srv_2.path}/ftpdir" password="${msg_srv_2.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${msg_srv_2.ssh.host}"	port="${msg_srv_2.ssh.port}" username="${msg_srv_2.ssh.username}"  password="${msg_srv_2.ssh.password}" trust="true"	command="cd ${msg_srv_2.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+		</target>
+</project>

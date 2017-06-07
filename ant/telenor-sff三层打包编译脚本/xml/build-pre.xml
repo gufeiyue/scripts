@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!--
+/**
+ * create and delpoy ant scripts
+ * usage:  ant
+ * <p>Title: </p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2013</p>
+ * <p>Company: AI(NanJing)</p>
+ * @author 
+ * @create date  2014-07-10
+ * @version 8.01
+ */
+-->
+<project name="sff" default="usage" basedir="."> 
+   <description>发布和部署脚本</description> 
+   <target name="init" description="初始化路径"> 
+      <property name="project.flying.startup"
+                value="../config/flying-config/${project_name}_app/META-INF/flyingserver/startup" />
+      
+      <property name="project.flying.web"
+                value="../config/flying-config/${project_name}_app/META-INF/flyingserver/web" />
+      
+      <property name="cluster.app" value="${project_name}-app" /> 
+      <property name="cluster.web" value="${project_name}-web" /> 
+      <property name="cluster.group.app" value="${cluster.app}-g1" /> 
+      <property name="cluster.group.web" value="${cluster.web}-g1" /> 
+   </target> 
+   <target name="clean-ant-create" depends="init"
+           description="清除临时目录"> 
+      <echo2 message="清除临时目录..." /> 
+      <deltree dir="${pro.tmp.path}" /> 
+      <deltree dir="${pro.dest.path}" /> 
+      <mkdir dir="${pro.dest.path}" /> 
+      <mkdir dir="${pro.tmp.path}" /> 
+      <mkdir dir="${pro.tmp.path}/classes" /> 
+      <echo2 message="清除临时目录完成!" /> 
+   </target> 
+   <target name="compile" depends="clean-ant-create"
+           description="编译java文件"> 
+		
+        <condition property="scondition">  
+            <!--如果属性jenkins不存在则返回false-->  
+            <isset property="jenkins" />  
+        </condition>  
+        <antcall target="jenkins">  
+        </antcall>  
+        <antcall target="manual">  
+        </antcall>  
+   </target>
+   <target name="jenkins" if="scondition">
+		<echo2 message="从../../veris662-sr0.2-rd-test-jar/dest目录拷贝sff.jar" />
+		<copy todir="${pro.dest.path}" file="../../veris662-sr0.2-rd-test-jar/dest/${project_name}/${project_name}.jar" />
+		<echo2 message="sff.jar已存放dest目录" />
+   </target>
+   <target name="manual" unless="scondition"> 
+      <echo2 message="开始编译java文件...${pro.svn.path}" />
+      
+      <javac encoding="UTF-8" target="1.5" includeantruntime="on"
+             srcdir="${pro.svn.path}/src" destdir="${pro.classes.path}"
+             debug="on" debuglevel="lines,vars,source" nowarn="true"
+             failonerror="true"> 
+         <classpath> 
+            <fileset dir="${project.lib.path}" includes="**/*.jar" /> 
+            <fileset dir="${pro.svn.lib}" includes="**/*.jar" /> 
+         </classpath> 
+         <include name="**/*.*" /> 
+         <exclude name="**/.svn/*.*" /> 
+         <exclude name="test/**/*.*" /> 
+         <exclude name="**/test/*.*" /> 
+         <exclude name="example/**/*.*" /> 
+      </javac> 
+
+			<copy todir="${pro.classes.path}/com/ai/oss/tn/sf/inter/sys/test">
+			<fileset dir="${pro.svn.path}/src/com/ai/oss/tn/sf/inter/sys/test" includes="**/*.*">
+				<exclude name="**/*.java" />
+			</fileset>
+			</copy>
+			
+
+      <jar jarfile="${pro.dest.path}/${project_name}.jar"> 
+         <fileset dir="${pro.classes.path}"> 
+            <include name="**/*.class" /> 
+            <include name="**/*.xml" /> 
+         </fileset> 
+      </jar> 
+      <echo2 message="编译java文件完成!" /> 
+   </target> 
+   <target name="taskdefine" depends="compile"
+           description="任务定义和声明"> 
+      <taskdef name="FlyingGenerator"
+               classname="com.ai.appframe2.complex.ant.FlyingGeneratorAntTask">
+         
+         <classpath> 
+
+<!--强制优先搜索sff_app_all的config的目录下的内容-->
+<!-- <pathelement path="${project.app.config}" />
+	 <pathelement path="${project.ant.config.path}" />	 -->
+            <pathelement path="${pro.classes.path}" /> 
+            <pathelement path="${pro.svn.config}" /> 
+            <pathelement path="${pro.config.path}" /> 
+            <fileset dir="${project.lib.path}" includes="**/*.jar" /> 
+            <fileset dir="${pro.svn.lib}" includes="**/*.jar" /> 
+            <fileset dir="../dest/sff" includes="*.jar" />
+         </classpath> 
+      </taskdef> 
+      <taskdef name="FlyingServiceFile"
+               classname="com.ai.appframe2.complex.ant.CreateFlyingServiceFileAntTask">        
+         <classpath> 
+<!--强制优先搜索sff_app_all的config的目录下的内容-->
+            <pathelement path="${pro.classes.path}" /> 
+            <pathelement path="${pro.svn.config}" /> 
+            <pathelement path="${pro.config.path}" /> 
+            <fileset dir="${project.lib.path}" includes="**/*.jar" /> 
+            <fileset dir="${pro.svn.lib}" includes="**/*.jar" /> 
+            <fileset dir="../dest/sff" includes="*.jar" />
+         </classpath> 
+      </taskdef> 
+      
+      
+      <taskdef name="PreCreateProcess"
+               classname="com.ai.appframe2.complex.ant.PreCreateProcessTask">  
+         <classpath> 
+       			 <pathelement path="${pro.classes.path}" /> 
+            <pathelement path="${pro.svn.config}" /> 
+            <pathelement path="${pro.config.path}" /> 
+            <fileset dir="${project.lib.path}" includes="**/*.jar" /> 
+            <fileset dir="${pro.svn.lib}" includes="**/*.jar" /> 
+            <fileset dir="../dest/sff" includes="*.jar" />
+         </classpath> 
+      </taskdef> 
+      <taskdef name="jspc" classname="org.apache.jasper.JspC"> 
+         <classpath> 
+
+<!--首先使用tomcatlib下面的jar包,bes的jspc不能使用-->
+            <fileset dir="${project.lib.path}" includes="**/*.jar" /> 
+            <fileset dir="${pro.svn.lib}" includes="**/*.jar" /> 
+         </classpath> 
+      </taskdef> 
+   </target> 
+   <target name="pre_create_process" depends="taskdefine"
+           description="预先创建process的java代码">
+      
+      <echo2 message="开始预先生成process的java代码" />
+      
+      <mkdir dir="${pro.tmp.path}/process/tmp" /> 
+      <mkdir dir="${pro.tmp.path}/process/src" /> 
+      <mkdir dir="${pro.tmp.path}/process/classes" /> 
+      <jar jarfile="${pro.tmp.path}/process/tmp/process_wvm.jar"> 
+         <fileset dir="${pro.svn.config}"> 
+            <include name="**/*.wvm" /> 
+         </fileset> 
+      </jar> 
+      <PreCreateProcess destPath="${pro.tmp.path}/process/src"
+                        processEngineImplClassName="com.ai.comframe.vm.processflow.ProcessEnginePreCompileImpl"
+                        workflowTemplateClassName="com.ai.comframe.vm.template.WorkflowTemplate">
+         
+         <fileset dir="${pro.tmp.path}/process/tmp" includes="*.jar" /> 
+      </PreCreateProcess> 
+      <javac srcdir="${pro.tmp.path}/process/src"
+             destdir="${pro.tmp.path}/process/classes" debug="on"
+             debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+         
+         <classpath> 
+            <fileset dir="${pro.svn.lib}" includes="*.jar" /> 
+
+            <fileset dir="${pro.dest.path}" includes="*.jar" />
+            
+         </classpath> 
+         <include name="**/*.*" /> 
+      </javac> 
+      <jar jarfile="${pro.dest.path}/pre_process.jar"> 
+         <fileset dir="${pro.tmp.path}/process/classes"> 
+            <include name="**/*.class" /> 
+         </fileset> 
+      </jar> 
+	  <copy todir="${pro.svn.lib}" file="${pro.dest.path}/pre_process.jar" />
+      <echo2 message="生成process的java代码完成" />
+      
+   </target> 
+   <target name="create" depends="pre_create_process"
+           description="create ear and war"> 
+      <ant antfile="build-app.xml" dir="." target="app-war" /> 
+
+	  <ant antfile="build-process.xml" dir="." target="process-jar"/>
+      <echo2 message="build-pre编译代码完成！" />
+      
+   </target> 
+   <target name="deploy-web-g1" depends="init" description="deploy-web-g1"> 
+      <ant antfile="deploy-web.xml" dir="." target="deploy-web" /> 
+   </target> 
+   <target name="deploy-app-g1" depends="init" description="deploy-app-g1"> 
+      <ant antfile="deploy-app.xml" dir="." target="deploy-app" /> 
+   </target> 
+   <target name="usage" description="usage"> 
+      <echo message="sff create and deploy ant scripts" /> 
+      <echo message="************************************" /> 
+      <echo message="***** PLEASE BE CAREFUL USE!!! *****" /> 
+      <echo message="***** PLEASE BE CAREFUL USE!!! *****" /> 
+      <echo message="************************************" /> 
+   </target> 
+</project> 

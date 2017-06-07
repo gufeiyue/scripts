@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<!--
+/**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2014</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author wusk
+     * @create date  2014-12-03
+     * @version 
+     */
+-->
+
+<project name="common" default="usage" basedir=".">
+
+    <description>common基础构建打包</description>
+   
+    <property environment="env" />
+    <property file="${region}_buildnv.properties"/>
+
+    <target name="init" description="初始化环境">
+
+        <echo message="env init by buildnv.properties ..."/>
+        <property name="ant-contrib.jar" location="../ant/lib/ant-contrib-1.0b3.jar" />
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${ant-contrib.jar}" />
+
+        <property name="common_jar_name" value="busi_common"/>
+        <property name="busi_meta_jar_name" value="busi_meta"/>
+        <property name="busi_meta_cls_jar_name" value="busi_meta_cls"/>
+        <property name="dest_common_lib_path" value="${project.dest.dir}/common"/> 
+       
+        <echo message="初始化环境完成"/>
+    </target>
+    
+    <target name="clean-ant-create" depends="init" description="清除临时目录">
+        <echo message="清除临时目录..."/>
+        
+				<deltree dir="${project.dest.dir}"/>
+        <deltree dir="${project.tmp.path}"/>
+        
+        <mkdir dir="${project.tmp.path}"/>
+        <mkdir dir="${project.tmp.path}/classes"/>
+        <mkdir dir="${project.dest.dir}/common"/>
+        <mkdir dir="${project.tmp.path}/all_dest_lib"/>
+        <mkdir dir="${project.tmp.path}/all_domain_lib"/>
+
+        <echo message="清除临时目录完成"/>
+    </target>
+        
+    <!--打包所有工程下config目录-->
+    <target name="copy" depends="clean-ant-create" description="循环拷贝所有域的src和config文件到tmp/src和tmp/config目录,供后面提取common lib包使用">
+        
+        <!--loop每个工程，把代码cp到临时目录，这里要用变量替换-->
+        <foreach list="businesscommon,${project.list}" target="copyaction" param="projpath" delimiter=",">
+        </foreach>
+
+    </target>
+    
+    <target name="copyaction" description="执行copy动作,目前只拷贝了src和config">
+        <copydir src="${project.svn.path}/code/${projpath}" dest="${project.tmp.path}" forceoverwrite="true">
+            <include name="**/**/*.*" />
+                    
+            <exclude name="**/.svn/*.*" />
+            <exclude name="config/remote/**/*.*" />
+            <exclude name="config/socket/**/*.*" />
+            <exclude name="config/system/**/*.*" />
+            <exclude name="config/task/**/*.*" />
+            <exclude name="config/tf/**/*.*" />
+            <exclude name="config/*.xml" />
+            <exclude name="config/*.properties" />
+        </copydir>
+        
+    </target>
+        
+    <target name="subcompile" depends="copy" description="子编译项目，编译所有工程的src">  
+            
+        <javac  srcdir="${project.tmp.path}/src" encoding="utf-8" destdir="${project.classes.path}" debug="on" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+            <classpath>
+                <fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.appengine.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.flying.lib.path}" includes="*.jar"/>     
+                <fileset dir="${project.third.lib.path}" includes="**/*.jar"/>           
+            </classpath>
+
+            <include name="**/abo/**/*.java" />
+            <include name="**/ivalues/*.java" />
+            <include name="**/bo/**/*.java" />
+            <include name="**/vo/**/*.java" />
+            <include name="**/**/I*SV.java"/>
+            
+            
+        </javac>
+              
+        <tstamp prefix="build.">
+            <format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+        </tstamp>
+                
+        <manifest file="${project.tmp.path}/MANIFEST.MF">
+            <attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+        </manifest>
+          
+        <jar jarfile="${dest_common_lib_path}/${busi_meta_jar_name}.jar" manifest="${project.tmp.path}/MANIFEST.MF">
+            <fileset dir="${project.tmp.path}/config">
+                <include name="**/*.*"/>
+            </fileset>
+        </jar>
+            
+        <jar jarfile="${dest_common_lib_path}/${busi_meta_cls_jar_name}.jar" manifest="${project.tmp.path}/MANIFEST.MF">
+            <fileset dir="${project.classes.path}">
+                <include name="**/*.class"/>
+            </fileset>
+        </jar>
+        
+        <!--清空编译好的common的classes文件，-->
+        <deltree dir="${project.classes.path}"/>
+        
+    </target>  
+   
+        
+    <!--编译businesscommon工程-->
+    <target name="compile" depends="subcompile" description="编译busicommon工程文件">
+
+        <echo message="开始编译java文件..."/>
+        <deltree dir="${project.classes.path}"/>
+        <mkdir dir="${project.classes.path}"/>
+        
+        <javac  srcdir="${project.svn.path}/code/businesscommon/src" encoding="utf-8" destdir="${project.classes.path}" debug="on" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+            <classpath>
+                <fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.appengine.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.flying.lib.path}" includes="*.jar"/> 
+                <fileset dir="${project.third.lib.path}" includes="**/*.jar"/>            
+                     
+                <fileset dir="${dest_common_lib_path}" includes="*.jar"/><!--依赖于busi_meta.jar busi_meta_cls.jar-->
+            </classpath>
+
+            <include name="**/*.*"/>
+                    
+        </javac>
+
+        <tstamp prefix="build.">
+            <format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+        </tstamp>
+        <manifest file="${project.tmp.path}/MANIFEST.MF">
+            <attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+        </manifest>
+        
+        <jar jarfile="${dest_common_lib_path}/${common_jar_name}.jar" manifest="${project.tmp.path}/MANIFEST.MF">
+            <fileset dir="${project.classes.path}">
+                <include name="**/*.class"/>
+            </fileset>
+        </jar>
+        
+         <!--copy dest/common下的公共jar包，到all_dest_lib-->
+    		<copydir src="${project.dest.dir}/common" dest="${project.tmp.path}/all_dest_lib" forceoverwrite="true">
+			    <include name="*.jar" />
+				</copydir>
+        
+        
+        <echo message="开始编译java文件完成"/>
+    </target>
+    
+
+    <target name="usage" depends="init" description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

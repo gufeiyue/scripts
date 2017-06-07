@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GB2312"?>
+<project name="sfframe" basedir=".">
+	
+		<!--SVN全量下载 -->
+	<target name="svn-full-down-test">
+		<ant antfile="build-tn.xml" target="svn-full-down-test" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="compile-local" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="set-jars" inheritAll="false" />
+	</target>
+	
+		<target name="svn-full-down-dev">
+		<ant antfile="build-tn.xml" target="svn-full-down-dev" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="compile-local" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="set-jars" inheritAll="false" />
+	</target>
+	
+	<!--SVN增量下载 -->
+	<target name="svn-update-down-compile-init">
+		<ant antfile="build-tn.xml" target="svn-update-down" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="compile-local" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="set-jars" inheritAll="false" />
+	</target>
+	
+	<target name="compile-init">
+		<ant antfile="build-tn.xml" target="compile-local" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="set-jars" inheritAll="false" />
+	</target>
+
+	<!--web侧war包 jsp不预编译   -->
+	<target name="build-web-no-jspc">
+		 <ant antfile="build-tn.xml" target="jar-web-config" inheritAll="false" />
+		<ant antfile="build-tn.xml" target="build-web-no-jspc" inheritAll="false" />
+	</target>
+
+	
+</project>

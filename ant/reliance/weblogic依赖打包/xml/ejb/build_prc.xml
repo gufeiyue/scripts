@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2014</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author wusk
+     * @create date  2014-12-03
+     * @version 
+     */
+-->
+
+<project name="build_prc" default="usage" basedir=".">
+
+    <description>后台进程打包</description>
+   
+    <property environment="env" />
+    <property file="buildnv.properties"/>
+    
+    <property name="project_name" value="aiprc"/>
+			    
+
+		<target name="clean-ant-create"  description="清除临时目录">
+		    <echo message="清除临时目录..."/>
+			
+		    <mkdir dir="${project.dest.dir}/${project_name}"/>
+		    <mkdir dir="${project.tmp.code.path}/${project_name}"/>
+			
+		    <echo message="清除临时目录完成"/>
+		</target>
+
+		<!-- 打后台进程ear包 -->
+	<target name="compile" depends="clean-ant-create" description="domain ear 打包">	
+
+		    <!--拷贝runtime_config配置文件到临时目录-->
+<!-- 	    <copydir src="${project.runtime.config}/crm_exe/config" dest="${project.tmp.code.path}/${project_name}/ejb-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir> -->
+		
+
+    			<!--将配置文件打包成config.jar包-->
+<!-- 		<jar jarfile="${project.tmp.code.path}/${project_name}/ejb-config/${project_name}_config.jar">
+			<fileset dir="${project.tmp.code.path}/${project_name}/ejb-config">
+				<include name="**/*"/>
+		 </fileset>
+		</jar> -->
+
+		<jar jarfile="${project.dest.dir}/ear/${project_name}.ear">
+
+			<!-- 平台包 -->
+			<fileset dir="${project.appengine.lib.apache}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.appengine}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.other}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.runtime}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.webframe}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.events}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.drools}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.jrules}"  includes="*.jar"/>
+			<fileset dir="${project.appengine.lib.test}"  includes="*.jar"/>
+			<fileset dir="${project.weblogic.lib.path}"  includes="*.jar"/>
+			
+			<!-- 各个域的jar包 -->
+			<fileset dir="${project.dest.dir}/all_dest_lib">
+				<include name="*.jar"/>
+				<exclude name="*_ejb*.jar"/>	
+			</fileset>
+			
+			<!-- config配置文件 -->
+<!-- 			<fileset dir="${project.tmp.code.path}/${project_name}/ejb-config">
+				<include name="${project_name}_config.jar"/>
+			</fileset> -->
+					
+		</jar>
+				
+    </target>
+
+    <target name="usage"  description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

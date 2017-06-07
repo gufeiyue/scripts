@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * create and delpoy ant scripts
+ * usage:  ant
+ * <p>Title: </p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2013</p>
+ * <p>Company: AI(NanJing)</p>
+ * @author 
+ * @create date  2014-07-10
+ * @version 8.01
+ */
+-->
+<project name="crm" default="usage" basedir=".">
+
+	<target name="init" description="环境初始化">
+		<taskdef name="echo2" classname="com.ai.appframe2.complex.ant.Echo2">
+			<classpath>
+				<fileset dir="../staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		<taskdef name="property_rc2" classname="com.ai.appframe2.complex.ant.PropertiesRC2Task">
+			<classpath>
+				<fileset dir="../staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		
+		<property_rc2 file="build.properties"/>
+		<property name="project_name" value="crm"/>
+		<property name="jar_name" value="${project_name}"/>
+		<property name="flying_name" value="${project_name}_flying"/>
+		<property name="ear_name" value="${project_name}_app"/>
+		<property name="war_name" value="${project_name}_web"/>
+		<property name="flying_client_name" value="${project_name}_flying_client"/>
+		<property name="third_jar_name" value="${project_name}_third_jar_by_ai"/>
+		<property name="process_exe_configext" value="process_${project_name}_exe_configext"/>		
+		
+		
+		<property name="project.tmp.path" value="../tmp/${project_name}"/>
+		<property name="project.classes.path" value="${project.tmp.path}/classes"/>
+		
+		<property name="project.dist.dir" value="../dist/${project_name}"/>		
+		<property name="project.conf.app.config"  value="${project.conf.path}/${project_name}_app/${project_name}_app_all/config"/>
+		<property name="project.conf.app.config0" value="${project.conf.path}/${project_name}_app/${project_name}_app_0/config"/>
+		<property name="project.conf.app.config1" value="${project.conf.path}/${project_name}_app/${project_name}_app_1/config"/>
+		<property name="project.conf.app.config2" value="${project.conf.path}/${project_name}_app/${project_name}_app_2/config"/>
+		<property name="project.conf.app.html"    value="${project.conf.path}/${project_name}_app/${project_name}_app_web/html"/>
+		<property name="project.conf.web.html"    value="${project.conf.path}/${project_name}_web/html"/>
+		<property name="project.conf.web.config" value="${project.conf.path}/${project_name}_web/config"/>		
+		<property name="project.conf.exe.config" value="${project.conf.path}/${project_name}_exe/config"/>
+		
+		<property name="project.svn.path" value="../svn/${project_name}"/>
+		<property name="project.svn.config" value="${project.svn.path}/config"/>
+		<property name="project.svn.html" value="${project.svn.path}/html"/>
+		<property name="project.svn.lib" value="${project.svn.path}/html/WEB-INF/lib"/>
+		<property name="project.svn.service" value="${project.svn.path}/config/system/service"/>
+		<property name="project.svn.version" value="${project.svn.service}/version.txt"/>
+		
+		<property name="project.flying.startup" value="../config/flying-config/${project_name}_app/META-INF/flyingserver/startup"/>
+		<property name="project.flying.web" value="../config/flying-config/${project_name}_app/META-INF/flyingserver/web"/>	
+		
+		
+		<echo2 message="CRM 环境初始化..."/>	
+		<property name="project_name" value="crm"/>
+		<property name="project.center1" value="true"/>
+		<property name="project.center2" value="true"/>		
+		<echo2 message="CRM 完成环境初始化!"/>	
+	</target>
+	<target name="clean-ant-create" depends="init" description="清除临时目录">
+		<echo2 message="清除临时目录..."/>
+		<deltree dir="${project.tmp.path}"/>
+		<mkdir dir="${project.tmp.path}"/>
+		<mkdir dir="${project.tmp.path}/classes"/>
+		<echo2 message="清除临时目录完成!"/>
+	</target>
+	
+	
+	<target name="compile" depends="clean-ant-create" description="编译java文件">
+		<echo2 message="开始编译java文件..."/>
+		<javac  encoding="UTF-8" target="1.5" includeantruntime="on" srcdir="${project.svn.path}/src" destdir="${project.classes.path}" debug="on" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+			<classpath>
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>    	
+			</classpath>
+			<include name="**/*.*"/>						
+			<exclude name="**/.svn/*.*" />
+			<exclude name="test/**/*.*" />
+			<exclude name="**/test/*.*" />
+			<exclude name="example/**/*.*" />
+		</javac>
+
+		<tstamp prefix="build.">
+			<format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+		</tstamp>
+		<manifest file="${project.tmp.path}/MANIFEST.MF">
+			<attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+		</manifest>
+
+		<deltree dir="${project.tmp.path}/jar_path"/>
+		<mkdir dir="${project.tmp.path}/jar_path"/>
+
+		<jar jarfile="${project.tmp.path}/jar_path/${jar_name}.jar" manifest="${project.tmp.path}/MANIFEST.MF">
+			<fileset dir="${project.classes.path}">
+				<include name="**/*.class"/>
+			</fileset>
+		</jar>
+		<echo2 message="编译java文件完成!"/>
+	</target>
+		     	
+	<target name="taskdefine" depends="compile" description="任务定义和声明">
+		<taskdef name="FlyingGenerator" classname="com.ai.appframe2.complex.ant.FlyingGeneratorAntTask">
+			<classpath>
+				<!--强制优先搜索crm_app_all的config的目录下的内容-->
+				<pathelement path="${project.app.config}" />
+				<pathelement path="${project.ant.config.path}" />	    			
+				<pathelement path="${project.classes.path}" />
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+				<fileset dir="${project.dist.dir}" includes ="*.jar" />
+			</classpath>
+		</taskdef>
+
+		<taskdef name="FlyingServiceFile" classname="com.ai.appframe2.complex.ant.CreateFlyingServiceFileAntTask">
+			<classpath>
+				<!--强制优先搜索crm_app_all的config的目录下的内容-->
+				<pathelement path="${project.app.config}" />
+				<pathelement path="${project.ant.config.path}" />	    			
+				<pathelement path="${project.classes.path}" />
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+				<fileset dir="${project.dist.dir}" includes ="*.jar" />
+			</classpath>
+		</taskdef>
+
+		<taskdef name="VersionInfo" classname="com.ai.appframe2.complex.ant.VersionInfoTask">
+			<classpath>
+				<pathelement path="${project.ant.config.path}" />
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+		<taskdef name="AIReplace" classname="com.ai.appframe2.complex.ant.AIReplaceTask">
+			<classpath>
+				<pathelement path="${project.ant.config.path}" />
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+		<taskdef name="AIReplace2" classname="com.ai.appframe2.complex.ant.AIReplace2Task">
+			<classpath>
+				<pathelement path="${project.ant.config.path}" />
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+		<taskdef name="PreCreateProcess" classname="com.ai.appframe2.complex.ant.PreCreateProcessTask">
+			<classpath>
+				<pathelement path="${project.svn.config}" />
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+				<fileset dir="${project.dist.dir}" includes ="*.jar" />
+				<fileset dir="${project.tmp.path}/jar_path" includes="${jar_name}.jar"/>
+			</classpath>
+		</taskdef>
+
+		<taskdef name="backup" classname="com.ai.appframe2.complex.ant.Backup2Task">
+			<classpath>
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+		<taskdef name="jspc" classname="org.apache.jasper.JspC">
+			<classpath>
+				<!--首先使用tomcatlib下面的jar包,bes的jspc不能使用-->
+				<fileset dir="${project.tomcat.lib.path}" includes="*.jar"/>					
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<!--<fileset dir="${project.flying.lib.path}" includes="*.jar"/>-->
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+	</target>
+	<target name="version" depends="taskdefine" description="创建版本信息">
+		<echo2 message="版本文件生成到${project.svn.path}"/>
+		<VersionInfo destFile="${project.svn.version}"/>
+	</target>	
+	
+   	<target name="pre_create_process" depends="version" description="预先创建process的java代码">
+       	<echo2 message="开始预先生成process的java代码"/>
+
+       	<deltree dir="${project.tmp.path}/process/tmp"/>
+      	<deltree dir="${project.tmp.path}/process/src"/>
+       	<deltree dir="${project.tmp.path}/process/classes"/>
+
+      	<mkdir dir="${project.tmp.path}/process/tmp"/>
+      	<mkdir dir="${project.tmp.path}/process/src"/>
+       	<mkdir dir="${project.tmp.path}/process/classes"/>
+
+       	<jar jarfile="${project.tmp.path}/process/tmp/process_wvm.jar">
+		 	<fileset dir="${project.svn.config}">
+		   		<include name="**/*.wvm"/>
+		  	</fileset>
+	    </jar>
+
+       	<PreCreateProcess destPath="${project.tmp.path}/process/src" processEngineImplClassName="com.ai.comframe.vm.processflow.ProcessEnginePreCompileImpl"  workflowTemplateClassName="com.ai.comframe.vm.template.WorkflowTemplate">
+			<fileset dir="${project.tmp.path}/process/tmp" includes="*.jar"/>
+       	</PreCreateProcess>
+	
+       	<javac	srcdir="${project.tmp.path}/process/src" destdir="${project.tmp.path}/process/classes" debug="on" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+	    	<classpath> 
+				<fileset dir="${project.flying.lib.path}" includes="*.jar"/>	
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="${project.svn.lib}" includes="*.jar"/>					 
+		      	<fileset dir="${project.dist.dir}" includes ="*.jar" /> 
+		       	<fileset dir="${project.tmp.path}/jar_path" includes="${jar_name}.jar"/>
+		    </classpath>
+	    	<include name="**/*.*"/>
+       	</javac>
+
+       	<jar jarfile="${project.svn.lib}/pre_process.jar">
+		 	<fileset dir="${project.tmp.path}/process/classes">
+		   		<include name="**/*.class"/>
+		  	</fileset>
+	    </jar>
+
+       	<echo2 message="生成process的java代码完成"/>
+   	</target>
+
+		
+   	<target name="backup" depends="pre_create_process" description="backup">
+       	<tstamp prefix="backup.">
+	  		<format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+       	</tstamp>
+
+       	<backup hisSize="5" backupdir="${project.backup.dir}" destfile="${project.backup.dir}/backup_${jar_name}_${backup.time}.tar" basedir="${project.dist.dir}"/>
+   	</target>
+
+   	<target name="create" depends="backup" description="create ear and war">
+       	<delete file="${project.dist.dir}/${jar_name}.jar" failonerror="true"/>
+       	<move file="${project.tmp.path}/jar_path/${jar_name}.jar" tofile="${project.dist.dir}/${jar_name}.jar"/>
+
+       	<ant antfile="build-app.xml" dir="." target="app-war"/>
+       	<ant antfile="build-process.xml" dir="." target="process-jar"/>
+       	<echo2 message="build-pre编译代码完成！"/>
+   	</target>	
+
+</project>

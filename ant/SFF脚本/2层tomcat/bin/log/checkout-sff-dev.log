@@ -1,0 +1,42 @@
+Buildfile: ../xml/allinone-oss.xml
+
+svn-full-down-dev:
+
+svn-full-down-dev:
+     [echo] download full code from svn...
+   [delete] Deleting directory /home/aideploy/oss_test/svn/sff
+    [mkdir] Created dir: /home/aideploy/oss_test/svn/sff
+      [svn] Deprecated attribute 'svnkit'. This attribute will disappear with SVNANT 1.3.2. Use svnSetting instead.
+      [svn] Deprecated attribute 'javahl'. This attribute will disappear with SVNANT 1.3.2. Use svnSetting instead.
+      [svn] Deprecated attribute 'username'. This attribute will disappear with SVNANT 1.3.2. Use svnSetting instead.
+      [svn] Deprecated attribute 'password'. This attribute will disappear with SVNANT 1.3.2. Use svnSetting instead.
+     [echo] delete useless files in ../svn/sff/html/html/webframe/example
+   [delete] Deleting directory /home/aideploy/oss_test/svn/sff/html/webframe/example
+     [echo] download code done!
+
+compile-local:
+   [delete] Deleting directory /home/aideploy/oss_test/tmp/sf/local
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/local/classes
+    [javac] Compiling 616 source files to /home/aideploy/oss_test/tmp/sf/local/classes
+    [javac] 注意：某些输入文件使用或覆盖了已过时的 API。
+    [javac] 注意：要了解详细信息，请使用 -Xlint:deprecation 重新编译。
+    [javac] 注意：某些输入文件使用了未经检查或不安全的操作。
+    [javac] 注意：要了解详细信息，请使用 -Xlint:unchecked 重新编译。
+     [echo] java compile done!
+      [jar] Building jar: /home/aideploy/oss_test/tmp/sf/local/sff.jar
+      [jar] Building jar: /home/aideploy/oss_test/tmp/sf/local/sff_config.jar
+     [copy] Copying 2 files to /home/aideploy/oss_test/dest/local
+
+set-jars:
+     [echo] put all jars together for package and createmanifest
+   [delete] Deleting directory /home/aideploy/oss_test/tmp/sf/lib
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/lib
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/libtmp
+     [copy] Copying 117 files to /home/aideploy/oss_test/tmp/sf/libtmp
+     [copy] Copying 117 files to /home/aideploy/oss_test/tmp/sf/lib
+   [delete] Deleting directory /home/aideploy/oss_test/tmp/sf/libtmp
+      [jar] Building jar: /home/aideploy/oss_test/tmp/sf/local/sff_lib.jar
+     [copy] Copying 3 files to /home/aideploy/oss_test/dest/local
+
+BUILD SUCCESSFUL
+Total time: 1 minute 29 seconds

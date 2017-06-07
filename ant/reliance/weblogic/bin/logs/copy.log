@@ -1,0 +1,8 @@
+Buildfile: /home/aideploy/deploy_zw/xml_ejb/build_domain.xml
+
+copy:
+  [copydir] DEPRECATED - The copydir task is deprecated.  Use copy instead.
+  [copydir] Copying 185 files to /home/aideploy/deploy_zw/tmp/crmsaas/ear/APP-INF/lib
+
+BUILD SUCCESSFUL
+Total time: 1 second

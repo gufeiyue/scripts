@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<!--
+/**
+ * create and delpoy ant scripts
+ * usage:  ant
+ * <p>Title: </p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2013</p>
+ * <p>Company: AI(NanJing)</p>
+ * @author 
+ * @create date  2014-07-10
+ * @version 8.01
+ */
+-->
+
+<project name="crm" default="usage" basedir=".">
+
+	<target name="init" description="环境初始化">
+		<taskdef name="echo2" classname="com.ai.appframe2.complex.ant.Echo2">
+			<classpath>
+				<fileset dir="../lib/staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		<taskdef name="property_rc2" classname="com.ai.appframe2.complex.ant.PropertiesRC2Task">
+			<classpath>
+				<fileset dir="../lib/staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		
+	</target>
+	<target name="init-crm" depends="init" description="CRM环境初始化">
+		<echo2 message="CRM 环境初始化..."/>	
+		<property name="project_name" value="crm"/>
+		<property name="project.center1" value="true"/>
+		<property name="project.center2" value="true"/>		
+		<echo2 message="CRM 完成环境初始化!"/>
+		<property_rc2 file="build.properties"/>
+	</target>
+	
+	<target name="init-cs" depends="init" description="CS环境初始化">
+		<echo2 message="CS 环境初始化..."/>	
+		<property name="project_name" value="cs"/>	
+		<property name="project.center1" value="false"/>
+		<property name="project.center2" value="false"/>
+		<echo2 message="CS 完成环境初始化!"/>
+		<property_rc2 file="build.properties"/>
+	</target>
+	
+	<target name="init-ucp" depends="init" description="UCP环境初始化">
+		<echo2 message="UCP 环境初始化..."/>	
+		<property name="project_name" value="ucp"/>	
+		<property name="project.center1" value="true"/>
+		<property name="project.center2" value="true"/>
+		<echo2 message="UCP 完成环境初始化!"/>
+		<property_rc2 file="build.properties"/>
+	</target>
+	
+	
+	<target name="compile-crm" depends="init-crm" description="编译CRM">
+		<echo message="CRM 开始编译..."/>
+		<ant antfile="build-pre.xml" dir="." target="create"/>
+		<echo message="CRM 完成编译..."/>
+	</target>
+		     	
+	<target name="compile-cs" depends="init-cs" description="编译CS">
+		<echo message="CS 开始编译..."/>
+		<ant antfile="build-pre.xml" dir="." target="create"/>
+		<echo message="CS 完成编译..."/>
+	</target>
+		     	
+	<target name="compile-ucp" depends="init-ucp" description="编译UCP">
+		<echo message="UCP 开始编译..."/>
+		<ant antfile="build-pre.xml" dir="." target="create"/>
+		<echo message="UCP 完成编译..."/>
+	</target>
+		     	
+	<target name="compile-crm-process" depends="init-crm" description="编译CRM process">
+		<echo message="CRM process开始编译..."/>
+       	<ant antfile="build-process.xml" dir="." target="process-jar"/>
+		<echo message="CRM process完成编译..."/>
+	</target>
+
+	<target name="compile-cs-process" depends="init-cs" description="编译CS process">
+		<echo message="CS process开始编译..."/>
+       	<ant antfile="build-process.xml" dir="." target="process-jar"/>
+		<echo message="CS process完成编译..."/>
+	</target>
+	
+	<target name="compile-ucp-process" depends="init-ucp" description="编译UCP process">
+		<echo message="UCP process开始编译..."/>
+       	<ant antfile="build-process.xml" dir="." target="process-jar"/>
+		<echo message="UCP process完成编译..."/>
+	</target>
+	
+	
+    <target name="deploy-crm-web-g1" depends="init-crm" description="deploy-crm-web-g1">
+    	<ant antfile="build-pre.xml" dir="." target="deploy-web-g1"/>
+    </target>
+	
+	<target name="deploy-crm-app-g1" depends="init-crm" description="deploy-crm-app-g1">
+		<ant antfile="build-pre.xml" dir="." target="deploy-app-g1"/>
+	</target>
+	
+	
+    <target name="deploy-cs-web-g1" depends="init-cs" description="deploy-cs-web-g1">
+    	<ant antfile="build-pre.xml" dir="." target="deploy-web-g1"/>
+    </target>	
+	
+	<target name="deploy-cs-app-g1" depends="init-cs" description="deploy-cs-app-g1">
+		<ant antfile="build-pre.xml" dir="." target="deploy-app-g1"/>
+	</target>
+	
+	
+    <target name="deploy-ucp-web-g1" depends="init-ucp" description="deploy-ucp-web-g1">
+    	<ant antfile="build-pre.xml" dir="." target="deploy-web-g1"/>
+    </target>	
+	
+	<target name="deploy-ucp-app-g1" depends="init-ucp" description="deploy-ucp-app-g1">
+		<ant antfile="build-pre.xml" dir="." target="deploy-app-g1"/>
+	</target>
+</project>

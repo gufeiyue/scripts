@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2014</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author wusk
+     * @create date  2014-12-03
+     * @version 
+     */
+-->
+
+<project name="build_integrated" default="usage" basedir=".">
+
+    <description>common基础构建打包</description>
+   
+    <property environment="env" />
+    <property file="buildnv.properties"/>
+    <property name="project_name" value="cep"/>
+    <property name="project.common.lib.path" value="${project.dest.dir}/common"/>
+ 		
+    <target name="init">
+    </target>
+    
+    <target name="clean-ant-create" depends="init" >
+        <echo message="清除临时目录..."/>
+
+        <mkdir dir="${project.dest.dir}/${project_name}"/>
+        <mkdir dir="${project.tmp.code.path}/${project_name}"/>
+        <mkdir dir="${project.dest.dir}/${project_name}/eventframe_subscriber"/>
+        <mkdir dir="${project.dest.dir}/${project_name}/eventframe_server"/>
+        
+        <echo message="清除临时目录完成"/>
+    </target>
+    
+    <target name="compile" depends="clean-ant-create" description="domain ear 打包">
+    	
+		    <copydir src="${project.runtime.config}/crm_app/crm_app_all/config" dest="${project.tmp.code.path}/${project_name}/flying-config" forceoverwrite="true">
+					<include name="**/*.*" />
+				</copydir>
+		
+		    <copydir src="${project.runtime.config}/crm_app/crm_app_integrated/domain_${project_name}/config" dest="${project.tmp.code.path}/${project_name}/flying-config" forceoverwrite="true">
+					<include name="**/*.*" />
+				</copydir>
+		
+				<jar jarfile="${project.dest.dir}/${project_name}/eventframe_subscriber/${project_name}_config.jar">
+					<fileset dir="${project.tmp.code.path}/${project_name}/flying-config">
+						<include name="**/*"/>
+		      </fileset>
+				</jar>
+				
+				<copydir src="${project.tmp.code.path}/all_dest_lib" dest="${project.dest.dir}/${project_name}/eventframe_subscriber">
+					<include name="*.jar"/>	
+				</copydir>
+				
+				<copydir src="${project.dest.dir}/integrated" dest="${project.dest.dir}/${project_name}/eventframe_subscriber">
+					<include name="*.jar"/>	
+				</copydir>
+				
+				<copydir src="${project.common.lib.path}" dest="${project.dest.dir}/${project_name}/eventframe_subscriber">
+					<include name="*.jar"/>	
+				</copydir>
+				
+				<copydir src="${project.common.lib.path}" dest="${project.dest.dir}/${project_name}/eventframe_server">
+					<include name="*.jar"/>	
+				</copydir>
+				
+    </target>
+
+    <target name="usage" depends="init" description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

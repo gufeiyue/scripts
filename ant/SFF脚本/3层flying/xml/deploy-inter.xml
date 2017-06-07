@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-inter" default="show" basedir=".">
+		<target name="show"  description="show">
+			<echo message="接口部署"/>			
+		</target>
+
+		<target name="deploy-all-inter"  depends="deploy-inter-crm" description="deploy-inter-all">
+			<echo message="接口全部部署完毕"/>			
+		</target>
+
+		<target name="deploy-inter-crm"  description="deploy-inter-crm">
+			<echo2 message="开始部署crm接口进程的操作..."/>			
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_1.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_1.ssh.username}@${aiinter_crm_1.ssh.host}:/${aiinter_crm_1.path}/ftpdir" password="${aiinter_crm_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_1.ssh.username}@${aiinter_crm_1.ssh.host}:/${aiinter_crm_1.path}/ftpdir" password="${aiinter_crm_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_1.ssh.username}@${aiinter_crm_1.ssh.host}:/${aiinter_crm_1.path}/ftpdir" password="${aiinter_crm_1.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_1.ssh.host}"	port="${aiinter_crm_1.ssh.port}" username="${aiinter_crm_1.ssh.username}"  password="${aiinter_crm_1.ssh.password}" trust="true"	command="cd ${aiinter_crm_1.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_2.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_2.ssh.username}@${aiinter_crm_2.ssh.host}:/${aiinter_crm_2.path}/ftpdir" password="${aiinter_crm_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_2.ssh.username}@${aiinter_crm_2.ssh.host}:/${aiinter_crm_2.path}/ftpdir" password="${aiinter_crm_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_2.ssh.username}@${aiinter_crm_2.ssh.host}:/${aiinter_crm_2.path}/ftpdir" password="${aiinter_crm_2.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_2.ssh.host}"	port="${aiinter_crm_2.ssh.port}" username="${aiinter_crm_2.ssh.username}"  password="${aiinter_crm_2.ssh.password}" trust="true"	command="cd ${aiinter_crm_2.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>			
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_3.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_3.ssh.username}@${aiinter_crm_3.ssh.host}:/${aiinter_crm_3.path}/ftpdir" password="${aiinter_crm_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_3.ssh.username}@${aiinter_crm_3.ssh.host}:/${aiinter_crm_3.path}/ftpdir" password="${aiinter_crm_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_3.ssh.username}@${aiinter_crm_3.ssh.host}:/${aiinter_crm_3.path}/ftpdir" password="${aiinter_crm_3.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_3.ssh.host}"	port="${aiinter_crm_3.ssh.port}" username="${aiinter_crm_3.ssh.username}"  password="${aiinter_crm_3.ssh.password}" trust="true"	command="cd ${aiinter_crm_3.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_4.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_4.ssh.username}@${aiinter_crm_4.ssh.host}:/${aiinter_crm_4.path}/ftpdir" password="${aiinter_crm_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_4.ssh.username}@${aiinter_crm_4.ssh.host}:/${aiinter_crm_4.path}/ftpdir" password="${aiinter_crm_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_4.ssh.username}@${aiinter_crm_4.ssh.host}:/${aiinter_crm_4.path}/ftpdir" password="${aiinter_crm_4.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_4.ssh.host}"	port="${aiinter_crm_4.ssh.port}" username="${aiinter_crm_4.ssh.username}"  password="${aiinter_crm_4.ssh.password}" trust="true"	command="cd ${aiinter_crm_4.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_5.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_5.ssh.username}@${aiinter_crm_5.ssh.host}:/${aiinter_crm_5.path}/ftpdir" password="${aiinter_crm_5.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_5.ssh.username}@${aiinter_crm_5.ssh.host}:/${aiinter_crm_5.path}/ftpdir" password="${aiinter_crm_5.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_5.ssh.username}@${aiinter_crm_5.ssh.host}:/${aiinter_crm_5.path}/ftpdir" password="${aiinter_crm_5.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_5.ssh.host}"	port="${aiinter_crm_5.ssh.port}" username="${aiinter_crm_5.ssh.username}"  password="${aiinter_crm_5.ssh.password}" trust="true"	command="cd ${aiinter_crm_5.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_6.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_6.ssh.username}@${aiinter_crm_6.ssh.host}:/${aiinter_crm_6.path}/ftpdir" password="${aiinter_crm_6.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_6.ssh.username}@${aiinter_crm_6.ssh.host}:/${aiinter_crm_6.path}/ftpdir" password="${aiinter_crm_6.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_6.ssh.username}@${aiinter_crm_6.ssh.host}:/${aiinter_crm_6.path}/ftpdir" password="${aiinter_crm_6.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_6.ssh.host}"	port="${aiinter_crm_6.ssh.port}" username="${aiinter_crm_6.ssh.username}"  password="${aiinter_crm_6.ssh.password}" trust="true"	command="cd ${aiinter_crm_6.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_7.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_7.ssh.username}@${aiinter_crm_7.ssh.host}:/${aiinter_crm_7.path}/ftpdir" password="${aiinter_crm_7.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_7.ssh.username}@${aiinter_crm_7.ssh.host}:/${aiinter_crm_7.path}/ftpdir" password="${aiinter_crm_7.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_7.ssh.username}@${aiinter_crm_7.ssh.host}:/${aiinter_crm_7.path}/ftpdir" password="${aiinter_crm_7.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_7.ssh.host}"	port="${aiinter_crm_7.ssh.port}" username="${aiinter_crm_7.ssh.username}"  password="${aiinter_crm_7.ssh.password}" trust="true"	command="cd ${aiinter_crm_7.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_8.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_8.ssh.username}@${aiinter_crm_8.ssh.host}:/${aiinter_crm_8.path}/ftpdir" password="${aiinter_crm_8.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_8.ssh.username}@${aiinter_crm_8.ssh.host}:/${aiinter_crm_8.path}/ftpdir" password="${aiinter_crm_8.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_8.ssh.username}@${aiinter_crm_8.ssh.host}:/${aiinter_crm_8.path}/ftpdir" password="${aiinter_crm_8.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_8.ssh.host}"	port="${aiinter_crm_8.ssh.port}" username="${aiinter_crm_8.ssh.username}"  password="${aiinter_crm_8.ssh.password}" trust="true"	command="cd ${aiinter_crm_8.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+			
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_9.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_9.ssh.username}@${aiinter_crm_9.ssh.host}:/${aiinter_crm_9.path}/ftpdir" password="${aiinter_crm_9.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_9.ssh.username}@${aiinter_crm_9.ssh.host}:/${aiinter_crm_9.path}/ftpdir" password="${aiinter_crm_9.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_9.ssh.username}@${aiinter_crm_9.ssh.host}:/${aiinter_crm_9.path}/ftpdir" password="${aiinter_crm_9.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_9.ssh.host}"	port="${aiinter_crm_9.ssh.port}" username="${aiinter_crm_9.ssh.username}"  password="${aiinter_crm_9.ssh.password}" trust="true"	command="cd ${aiinter_crm_9.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+
+    	<echo2 message="执行发布脚本(${aiinter_crm_10.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_10.ssh.username}@${aiinter_crm_10.ssh.host}:/${aiinter_crm_10.path}/ftpdir" password="${aiinter_crm_10.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_10.ssh.username}@${aiinter_crm_10.ssh.host}:/${aiinter_crm_10.path}/ftpdir" password="${aiinter_crm_10.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_10.ssh.username}@${aiinter_crm_10.ssh.host}:/${aiinter_crm_10.path}/ftpdir" password="${aiinter_crm_10.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_10.ssh.host}"	port="${aiinter_crm_10.ssh.port}" username="${aiinter_crm_10.ssh.username}"  password="${aiinter_crm_10.ssh.password}" trust="true"	command="cd ${aiinter_crm_10.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			
+			<echo2 message="执行发布脚本(${aiinter_crm_11.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_11.ssh.username}@${aiinter_crm_11.ssh.host}:/${aiinter_crm_11.path}/ftpdir" password="${aiinter_crm_11.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_11.ssh.username}@${aiinter_crm_11.ssh.host}:/${aiinter_crm_11.path}/ftpdir" password="${aiinter_crm_11.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_11.ssh.username}@${aiinter_crm_11.ssh.host}:/${aiinter_crm_11.path}/ftpdir" password="${aiinter_crm_11.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_11.ssh.host}"	port="${aiinter_crm_11.ssh.port}" username="${aiinter_crm_11.ssh.username}"  password="${aiinter_crm_11.ssh.password}" trust="true"	command="cd ${aiinter_crm_11.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+			<echo2 message="执行发布脚本(${aiinter_crm_12.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aiinter_crm_12.ssh.username}@${aiinter_crm_12.ssh.host}:/${aiinter_crm_12.path}/ftpdir" password="${aiinter_crm_12.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aiinter_crm_12.ssh.username}@${aiinter_crm_12.ssh.host}:/${aiinter_crm_12.path}/ftpdir" password="${aiinter_crm_12.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_inter_configext.jar" todir="${aiinter_crm_12.ssh.username}@${aiinter_crm_12.ssh.host}:/${aiinter_crm_12.path}/ftpdir" password="${aiinter_crm_12.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aiinter_crm_12.ssh.host}"	port="${aiinter_crm_12.ssh.port}" username="${aiinter_crm_12.ssh.username}"  password="${aiinter_crm_12.ssh.password}" trust="true"	command="cd ${aiinter_crm_12.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+		</target>
+</project>

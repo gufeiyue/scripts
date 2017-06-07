@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="app" default="app-war" basedir=".">
+
+	<!-- <target name="third-jar"  description="创建第三方需要的jar">
+		<jar jarfile="${pro.dest.path}/${third_jar_name}.jar">
+			<fileset dir="${pro.classes.path}/">
+				<include name="**/third/*.class"/>
+			</fileset>
+		</jar>
+	</target> -->
+
+	<target name="app-flying"  description="创建应用的flying">
+		<mkdir dir="${pro.tmp.path}/flying-src"/>
+		<mkdir dir="${pro.tmp.path}/flying-classes/META-INF/flyingserver/"/>
+		<mkdir dir="${pro.tmp.path}/flying-config"/>
+		<mkdir dir="${pro.tmp.path}/app-web"/>
+		<mkdir dir="${pro.tmp.path}/app-web/${project_name}_app_web.war"/>
+
+		<echo2 message="产生使用SV方式的flying..."/>	<!--产生使用SV方式的flying-->
+		<FlyingGenerator destPath="${pro.tmp.path}/flying-src" vmConfigPath="${pro.config.path}" failonerror="false">
+			<fileset dir="${pro.classes.path}">
+				<include name="**/*SV.class" />
+			</fileset>
+		</FlyingGenerator>
+
+		<echo2 message="产生使用配置文件方式的flying..."/><!--产生使用配置文件方式的flying-->
+		<FlyingGenerator destPath="${pro.tmp.path}/flying-src" vmConfigPath="${pro.config.path}" type="file" failonerror="false">
+		</FlyingGenerator>
+
+		<echo2 message="采用搜索jar文件方式生成flying..."/><!--采用搜索jar文件方式生成flying-->
+
+		<FlyingGenerator destPath="${pro.tmp.path}/flying-src" vmConfigPath="${pro.config.path}" type="jar" failonerror="false">
+			<fileset dir="${pro.svn.lib}/ai" includes ="*.jar">
+                               <!--
+				<include name="appframe.jar" />
+				<include name="secframe.jar" />
+				<include name="secframe_orgmodel.jar" />
+				<include name="comframe30.jar"/>
+				<include name="common.jar" />
+				<include name="omframe.jar" />
+				<include name="oneframe.jar" />
+				<include name="bce.jar" />
+				<include name="pce.jar" />
+				<include name="appframe_ext_exeframe.jar" />-->
+			</fileset>
+		</FlyingGenerator>
+
+		<echo2 message="产生flying的配置文件..."/><!--产生flying的配置文件-->
+
+		<FlyingServiceFile filename="${pro.tmp.path}/flying-classes/META-INF/flyingserver/services">
+			<fileset dir="${pro.tmp.path}/flying-src" includes="sv_*.txt"/>
+		</FlyingServiceFile>
+
+		<!--flying startup和web配置文件-->
+	
+		<copy file="${pro.config.path}/flying-config/${project_name}_app/META-INF/flyingserver/startup" tofile="${pro.tmp.path}/flying-classes/META-INF/flyingserver/startup"/>
+		<copy file="${pro.config.path}/flying-config/${project_name}_app/META-INF/flyingserver/web" tofile="${pro.tmp.path}/flying-classes/META-INF/flyingserver/web"/>
+
+		<javac srcdir="${pro.tmp.path}/flying-src" destdir="${pro.tmp.path}/flying-classes" debug="on" debuglevel="lines,vars,source" nowarn="true">
+			<classpath>
+				<pathelement path="${pro.classes.path}" />
+				<fileset dir="${project.lib.path}" includes="**/*.jar"/>
+				<fileset dir="${pro.svn.lib}" includes="**/*.jar"/>	
+				<fileset dir="../dest/sff" includes="sff.jar"/>
+			</classpath>
+			<include name="**/*.*"/>
+		</javac>
+
+		<jar jarfile="${pro.dest.path}/${project_name}_flying.jar">
+			<fileset dir="${pro.tmp.path}/flying-classes">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+
+	  <!--生成${project_name}_app_web.war文件-->
+	  <!--flying需要形成同名的目录形式-->
+		<copy  todir="${pro.tmp.path}/app-web/${project_name}_app_web.war">
+			<fileset dir="${pro.config.path}/runtime-config/${project_name}_app">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="app-ear" depends="app-flying" description="预编译和打包ear">
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/flying-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+
+		<move file="${pro.tmp.path}/flying-src/sv_class.txt" tofile="${pro.tmp.path}/flying-config/sv_class.txt"/>
+		<move file="${pro.tmp.path}/flying-src/sv_id.txt" tofile="${pro.tmp.path}/flying-config/sv_id.txt"/>
+
+		<!--使用运行时的配置文件覆盖原有的配置文件-->
+		<!--先使用跨库提交的config覆盖原来的配置文件-->
+		<!-- 后台进程config_0.jar app层用config_1.jar -->
+		<echo2 message="开始生成中心配置文件..."/>
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/flying-config_0" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/flying-config_1" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_exe" dest="${pro.tmp.path}/flying-config_0" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app" dest="${pro.tmp.path}/flying-config_1" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<!--
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app/${project_name}_app_0/config" dest="${pro.tmp.path}/flying-config_0" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/flying-config_1" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app/${project_name}_app_all/config" dest="${pro.tmp.path}/flying-config_1" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app/${project_name}_app_1/config" dest="${pro.tmp.path}/flying-config_1" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/flying-config_2" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app/${project_name}_app_all/config" dest="${pro.tmp.path}/flying-config_2" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_app/${project_name}_app_2/config" dest="${pro.tmp.path}/flying-config_2" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+-->
+		<!--将配置文件打包成config.jar包-->
+		<jar jarfile="${pro.tmp.path}/flying-config/config_0.jar">
+			<fileset dir="${pro.tmp.path}/flying-config_0">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+			<jar jarfile="${pro.tmp.path}/flying-config/config_1.jar">
+			<fileset dir="${pro.tmp.path}/flying-config_1">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+		<!--
+		<jar jarfile="${pro.tmp.path}/flying-config/config_1.jar">
+			<fileset dir="${pro.tmp.path}/flying-config_1">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+		<jar jarfile="${pro.tmp.path}/flying-config/config_2.jar">
+			<fileset dir="${pro.tmp.path}/flying-config_2">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+		-->
+		<copy todir="${pro.dest.path}" file="${pro.tmp.path}/flying-config/config_0.jar" />
+		<copy todir="${pro.dest.path}" file="${pro.tmp.path}/flying-config/config_1.jar" />
+		<!--
+		<copy todir="${pro.dest.path}" file="${pro.tmp.path}/flying-config/config_1.jar" />
+		<copy todir="${pro.dest.path}" file="${pro.tmp.path}/flying-config/config_2.jar" />
+	-->
+		<!-- 开始生成0中心 -->
+		<jar jarfile="${pro.dest.path}/${project_name}_app_0.ear">
+			
+			<fileset dir="${pro.svn.lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/flying-config">
+				<include name="config_1.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}_flying.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/app-web">
+				<include name="${project_name}_app_web.war/**/*"/>
+			</fileset>
+		</jar>
+		<!--
+		<jar jarfile="${pro.dest.path}/${project_name}_app_1.ear">
+			
+			<fileset dir="${pro.svn.lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/flying-config">
+				<include name="config_1.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}_flying.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/app-web">
+				<include name="${project_name}_app_web.war/**/*"/>
+			</fileset>
+		</jar>
+		
+		<jar jarfile="${pro.dest.path}/${project_name}_app_2.ear">
+			
+			<fileset dir="${pro.svn.lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/flying-config">
+				<include name="config_2.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}_flying.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.dest.path}">
+				<include name="${project_name}.jar"/>
+			</fileset>
+
+			<fileset dir="${pro.tmp.path}/app-web">
+				<include name="${project_name}_app_web.war/**/*"/>
+			</fileset>
+		</jar>
+		-->
+		
+	</target>	
+
+	
+	<target name="app-war" depends="app-ear" description="app-war">
+
+		<mkdir dir="${pro.tmp.path}/app-war"/>
+		<mkdir dir="${pro.tmp.path}/app-war/WEB-INF/src"/>
+		<mkdir dir="${pro.tmp.path}/app-war/WEB-INF/classes"/>
+		<mkdir dir="${pro.tmp.path}/app-war/WEB-INF/lib"/>
+		<mkdir dir="${pro.tmp.path}/app-war/WEB-INF/jsp-bak"/>
+
+		<copydir src="${pro.svn.html}" dest="${pro.tmp.path}/app-war" forceoverwrite="true">
+			<include name="**/*" />
+		</copydir>
+
+		<!--<copydir src="${pro.svn.lib}" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+			<include name="**/*.jar" />
+		</copydir>-->
+                
+                <copydir src="${pro.svn.lib}/ai" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+
+                <copydir src="${pro.svn.lib}/apache" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+
+                <copydir src="${pro.svn.lib}/bfs_new" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+
+                <copydir src="${pro.svn.lib}/other" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+                
+                <copydir src="${pro.svn.lib}/solr" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+				
+				     <copydir src="${pro.svn.lib}/runtime" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+				
+				     <copydir src="${pro.svn.lib}/lucene" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+
+                <copydir src="${pro.svn.lib}/rule" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+                        <include name="**/*.jar" />
+                </copydir>
+
+		<copydir src="${pro.dest.path}" dest="${pro.tmp.path}/app-war/WEB-INF/lib" forceoverwrite="true">
+			<include name="${project_name}.jar"/>
+			<include name="${project_name}_flying.jar"/>
+		</copydir>
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/app-war/WEB-INF/classes" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+
+
+		<!--使用运行时的配置文件覆盖原有的配置文件-->
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_web" dest="${pro.tmp.path}/app-war/WEB-INF/classes" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+
+		<!--使用运行时的配置文件覆盖原有的配置文件-->
+		<!--
+		<copydir src="${pro.config.path}/runtime-config/${project_name}_web/html" dest="${pro.tmp.path}/app-war/" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+-->
+		<!--将配置文件打包成config.jar包-->
+		<jar jarfile="${pro.tmp.path}/app-war/WEB-INF/lib/config.jar">
+			<fileset dir="${pro.tmp.path}/app-war/WEB-INF/classes">
+				<include name="**/*" />
+			</fileset>
+		</jar>
+
+		<deltree dir="${pro.tmp.path}/app-war/WEB-INF/classes"/>
+		<mkdir dir="${pro.tmp.path}/app-war/WEB-INF/classes"/>
+
+		<echo2 message="开始预编译jsp"/>
+		<!--采用flyingjspc进行jsp预编译-->
+		<jspc validateXml="false" javaEncoding="UTF-8" uriroot="${pro.tmp.path}/app-war" addWebXmlMappings="true"  webXmlFragment="${pro.tmp.path}/app-war/WEB-INF/generated_web.xml" outputDir="${pro.tmp.path}/app-war/WEB-INF/src" failOnError="false" listErrors="true"/>
+
+		<javac srcdir="${pro.tmp.path}/app-war/WEB-INF/src" destdir="${pro.tmp.path}/app-war/WEB-INF/classes" encoding="UTF-8" debug="on" debuglevel="lines,vars,source" failonerror="true">
+			<classpath>
+				<pathelement path="${pro.tmp.path}/app-war/WEB-INF/classes" />
+				<!--<fileset dir="${pro.tmp.path}/app-war/WEB-INF" includes="*.tld"/>-->
+				<!--<fileset dir="${pro.svn.lib}" includes="**/*.jar"/>-->
+                                <fileset dir="${pro.tmp.path}/app-war/WEB-INF/lib" includes="*.jar" />
+				<fileset dir="${project.lib.path}/tomcatlib" includes="*.jar"/>
+				<!--<fileset dir="${pro.dest.path}" includes="*.jar"/>-->
+			</classpath>
+		</javac>
+	  <echo2 message="预编译jsp完成"/>
+		<!--预编译jsp完成-->
+
+		<deltree dir="${pro.tmp.path}/app-war/WEB-INF/src"/>
+
+		<move todir="${pro.tmp.path}/app-war/WEB-INF/jsp-bak">
+			<fileset dir="${pro.tmp.path}/app-war">
+				<include name="**/*.jsp"/>
+				<exclude name="WEB-INF/**/*.jsp"/>
+			</fileset>
+		</move>
+
+		<delete file="${pro.dest.path}/${project_name}_web.war" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_web.war">
+			<fileset dir="${pro.tmp.path}/app-war">
+				<include name="**/*.*" />
+				<exclude name="**/servlet-api.jar" />
+				<exclude name="**/xercesImpl.jar" />
+				<exclude name="**/xmlParserAPIs.jar" />
+			</fileset>
+		</jar>
+	</target>
+
+</project>

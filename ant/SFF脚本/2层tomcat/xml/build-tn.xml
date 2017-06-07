@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="GB2312"?>
+<project name="build-tn" basedir=".">
+
+	<property file="build-tn.properties" />
+	
+	<path id="svnant.classpath">
+		<fileset dir="${build.lib}/svn">
+		  <include name="*.jar"/>
+		</fileset>
+	</path>  
+  
+    <!-- load the svn task ,define task in svnant jar -->
+    <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath" />
+  
+
+	
+	<target name="svn-full-down-test">
+		<echo message="download full code from svn..." />
+		<delete dir="${build.cvs.path}" />
+		<mkdir dir="${build.cvs.path}" />
+		<svn svnkit="true" javahl="false" username="${svn.user}" password="${svn.password}">
+			<checkout url="${svn.urltest}" revision="${svn.revision}" destPath="${svn.dest.path}" />
+		</svn>
+
+		<echo message="delete useless files in ${build.cvs.source.html.path}/html/webframe/example" />
+		<delete dir="${build.cvs.source.html.path}/webframe/example" />
+		<delete dir="${build.cvs.source.html.path}/webframe/common/cookie_*.jsp" />
+		<delete dir="${build.cvs.source.html.path}/webframe/myset_*.jsp" />
+		<echo message="download code done!" />
+	</target>
+	
+		<target name="svn-full-down-dev">
+		<echo message="download full code from svn..." />
+		<delete dir="${build.cvs.path}" />
+		<mkdir dir="${build.cvs.path}" />
+		<svn svnkit="true" javahl="false" username="${svn.user}" password="${svn.password}">
+			<checkout url="${svn.urldev}" revision="${svn.revision}" destPath="${svn.dest.path}" />
+		</svn>
+
+		<echo message="delete useless files in ${build.cvs.source.html.path}/html/webframe/example" />
+		<delete dir="${build.cvs.source.html.path}/webframe/example" />
+		<delete dir="${build.cvs.source.html.path}/webframe/common/cookie_*.jsp" />
+		<delete dir="${build.cvs.source.html.path}/webframe/myset_*.jsp" />
+		<echo message="download code done!" />
+	</target>
+
+	<target name="compile-local">
+		<delete dir="${build.tmp}/local" />
+		<mkdir dir="${build.tmp}/local/classes"/>
+		
+
+		<javac srcdir="${build.cvs.source.src.path}" destdir="${build.tmp}/local/classes" failonerror="true" debug="on" fork="true" memoryMaximumSize="1024m" encoding="GBK">
+			<compilerarg line="-encoding UTF-8 " /> 
+			<classpath>
+				<fileset dir="${build.cvs.source.lib.path}" includes="**/*.jar" />
+			</classpath>
+			<include name="**/*.*" />
+		</javac>
+		<echo message="java compile done!" />
+		
+		
+<!-- 		<copydir dest="${build.tmp}/local/classes" src="${build.cvs.source.project.path}/config">
+		    <include name="remote/client.properties" />
+			<include name="com/**/*.*" />
+			<include name="tf/**/*.*" />
+			<include name="template/**/*.*" />
+			<include name="task/**/*.*" />
+			<include name="system/**/*.*" />
+			<include name="TaskConfig.xml"/>
+			<include name="sfframe-config.xml"/>
+			<include name="SfAxConfig.xml"/>
+			<include name="bfsClientConfig.properties"/>
+			<include name="pattern_format.xml"/>
+			<include name="orgModulConfig.xml"/>
+			<include name="key_format.xml"/>
+			<include name="formrules.xml"/>
+			<include name="CommonTreeNode.xml"/>
+			<include name="bfms_format.xml"/>
+			<include name="bfms.xml"/>
+			<include name="AIRootConfig.xml"/>
+			<include name="AIConfig.xml"/>
+			<include name="log4j.properties"/>
+			<include name="secframe.properties"/>
+			<include name="comframe.ini"/>
+			<include name="secmem.properties"/>
+			<include name="karen.demo.020714.pfx"/>		
+		</copydir>
+
+			<copy todir="${build.tmp}/local/classes/com/ai/oss/tn/sf/inter/sys/test">
+			<fileset dir="${build.cvs.source.project.path}/src/com/ai/oss/tn/sf/inter/sys/test" includes="**/*.*">
+				<exclude name="**/*.java" />
+			</fileset>
+			</copy> -->
+			
+	   
+		<jar destfile="${build.tmp}/local/${LOCAL.SRC.PACKAGE.NAME}" basedir="${build.tmp}/local/classes" />
+		<jar destfile="${build.tmp}/local/${LOCAL.CFG.PACKAGE.NAME}" basedir="${build.cvs.source.project.path}/config" />
+
+		<copy todir="${build.dest}/local" overwrite="true">
+			<fileset dir="${build.tmp}/local"  includes="*.jar"/>
+		</copy>
+	</target>
+
+
+	<target name="set-jars">
+		<echo message="put all jars together for package and createmanifest" />
+		<!--
+		set-appjars任务拷贝所有的jar包到同一个目录是为了打包或createmanifest使用。
+		打APP的包时会将APP特有的${LOCAL.CFG.PACKAGE.NAME}拷贝到此目录覆盖。
+		所以，其他时候使用时要么要过滤掉${LOCAL.CFG.PACKAGE.NAME}，要么只涉及createmanifest任务[和${LOCAL.CFG.PACKAGE.NAME}内容无关]
+		-->
+		<delete dir="${build.tmp}/lib" />
+		<mkdir dir="${build.tmp}/lib" />
+		<delete dir="${build.tmp}/libtmp" />
+		<mkdir dir="${build.tmp}/libtmp" />
+
+
+		<copy todir="${build.tmp}/libtmp" flatten="true" overwrite="true">
+			<fileset dir="${build.cvs.source.lib.path}"  includes="**/*.jar" />			
+			<fileset dir="${build.tmp}/local" includes="${LOCAL.SRC.PACKAGE.NAME}" />
+			<!-- <fileset dir="${build.tmp}/local" includes="${LOCAL.CFG.PACKAGE.NAME}" /> -->
+			
+		</copy>
+		
+		<!--【*EDITFLAG#】 需视项目情况编辑 -->
+		<copy todir="${build.tmp}/lib" flatten="true" overwrite="true">
+			<fileset dir="${build.tmp}/libtmp"  includes="**/*.jar" >
+			</fileset>
+		</copy>
+		<delete dir="${build.tmp}/libtmp" />
+		
+		
+		<jar destfile="${build.tmp}/local/${LOCAL.LIB.PACKAGE.NAME}" basedir="${build.tmp}/lib" />
+		
+		<copy todir="${build.dest}/local" overwrite="true">
+			<fileset dir="${build.tmp}/local"  includes="*.jar"/>
+		</copy>
+		
+	</target>
+	
+
+	<target name="jar-web-config">
+		<echo message="build config jar for web application" />
+		<delete dir="${build.tmp}/web" />
+		<mkdir dir="${build.tmp}/web/config" />
+		<unjar src="${build.tmp}/local/${LOCAL.CFG.PACKAGE.NAME}" dest="${build.tmp}/web/config" />
+		<delete dir="${build.tmp}/web/config/com" />
+<!-- 		<copy todir="${build.tmp}/web/config" overwrite="true">
+			<fileset dir="${build.thirdlib.web.config}/config_ejb" includes="**/*.*" />
+		</copy>
+		<jar destfile="${build.tmp}/web/${LOCAL.CFG.PACKAGE.NAME}" basedir="${build.tmp}/web/config" /> -->
+		<echo message="done!" />
+	</target>
+
+	<target name="build-web-no-jspc">
+		<delete dir="${build.tmp}/web/war" />
+		<mkdir dir="${build.tmp}/web/war/WEB-INF/lib" />
+		<mkdir dir="${build.tmp}/local/classes/test/inter/action/xml" />
+
+		<echo message="copy files from html to war... ,exclude .rar .zip .txt !" />
+		<copy todir="${build.tmp}/web/war">
+			<fileset dir="${build.cvs.source.html.path}" includes="**/*.*">
+				<exclude name="**/*.rar" />
+				<exclude name="**/*.zip" />
+				<exclude name="**/*.txt" />
+			</fileset>
+		</copy>
+	<!-- 	<copy todir="${build.tmp}/web/war/WEB-INF">
+			<fileset dir="${build.thirdlib.web.config}" includes="weblogic.xml" />
+			<fileset dir="${build.thirdlib.web.config}" includes="web-borland.xml" />
+		</copy> -->
+		
+		<copy todir="${build.tmp}/web/war/WEB-INF/classes">
+			<fileset dir="${build.tmp}/web/config" includes="weblogic.xml" />
+		</copy>
+
+		<!--拷贝所有jar[工程中所有、本地src、本地config、sec和sff的ejb]到war/WEB-INF/lib下 -->
+		<copy todir="${build.tmp}/web/war/WEB-INF/lib" overwrite="true">
+			<fileset dir="${build.tmp}/lib" includes="**/*.jar">
+				<exclude name="${LOCAL.CFG.PACKAGE.NAME}" />
+				<exclude name="${LOCAL.SRC.PACKAGE.NAME}" />
+				<exclude name="${LOCAL.LIB.PACKAGE.NAME}" />	
+			</fileset>
+			<!--
+			<fileset dir="${build.thirdlib}/tmp" includes="${FRAME.EJB.PACKAGE.NAME}" />
+			<fileset dir="${build.thirdlib}/tmp" includes="${CORE.EJB.PACKAGE.NAME}" />
+			<fileset dir="${build.tmp}/web" includes="${LOCAL.CFG.PACKAGE.NAME}" />
+			-->
+		</copy>
+	
+	<!--拷贝config和test目录下的sf、oss到war/WEB-INF/classes下 -->
+			<copy todir="${build.tmp}/web/war/WEB-INF/classes" overwrite="true">
+			<fileset dir="${build.tmp}/local/classes" />
+			<fileset dir="${build.tmp}/web/config" />
+		</copy>
+		
+		
+<!-- 			<copy todir="${build.tmp}/local/classes/test/inter/action/xml">
+			
+			<fileset dir="${build.cvs.source.project.path}/src/test/inter/action/xml" includes="*.xml">
+				<exclude name="*.java" />
+			</fileset>
+			</copy> -->
+		<!--<delete dir="${build.tmp}/web/war/WEB-INF/classes/com" />-->
+		<!--<delete dir="${build.tmp}/web/war/WEB-INF/classes/test" />-->
+		<!--<delete dir="${build.tmp}/web/war/WEB-INF/classes/META-INF" />-->
+		<!--
+			<copy todir="${build.tmp}/web/war/WEB-INF/classes/test" overwrite="true">
+			<fileset dir="${build.tmp}/local/classes/test" />
+		</copy>
+		-->
+<!-- 		<jar destfile="${build.tmp}/local/${LOCAL.SRC.PACKAGE.NAME}" basedir="${build.tmp}/local/classes" /> -->
+  
+		<jar destfile="${build.tmp}/web/${WEB.PACKAGE.NAME}" basedir="${build.tmp}/web/war" />
+		<copy todir="${build.dest}" overwrite="true">
+			<fileset dir="${build.tmp}/web" includes="${WEB.PACKAGE.NAME}" />
+		</copy>
+	</target>
+
+
+</project>

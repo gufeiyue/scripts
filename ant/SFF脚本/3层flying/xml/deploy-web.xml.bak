@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-web" default="deploy-web" basedir=".">
+
+		<target name="deploy-web"  description="deploy-web">
+		 	<taskdef name="property2" classname="com.ai.appframe2.complex.ant.Property2">
+	    		<classpath>
+		      	<fileset dir="${project.svn.path}/lib/appframe" includes="*.jar"/>
+	    		</classpath>
+      </taskdef>
+
+
+			<property2 name="node1.ssh.host" name2="${current.cluster}.node1.ssh.host" />
+			<property2 name="node1.ssh.port" name2="${current.cluster}.node1.ssh.port" />
+			<property2 name="node1.ssh.username" name2="${current.cluster}.node1.ssh.username" />
+			<property2 name="node1.ssh.password" name2="${current.cluster}.node1.ssh.password" />
+
+			<property2 name="node2.ssh.host" name2="${current.cluster}.node2.ssh.host" />
+			<property2 name="node2.ssh.port" name2="${current.cluster}.node2.ssh.port" />
+			<property2 name="node2.ssh.username" name2="${current.cluster}.node2.ssh.username" />
+			<property2 name="node2.ssh.password" name2="${current.cluster}.node2.ssh.password" />			
+			
+    	<echo2 message="停止集群..."/>    
+    	<parallel	threadCount="8">    	
+    	<sequential>
+			<!--停止node1上的这个集群的srv-->
+    	<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd /home/yhweb/${current.name}/${current.cluster}/bin;stopallsrv.sh;"/>
+			</sequential>
+
+    	<sequential>
+			<!--停止node2上的这个集群的srv-->
+    	<sshexec host="${node2.ssh.host}"	username="${node2.ssh.username}" password="${node2.ssh.password}" trust="true"	command=" cd /home/yhweb/${current.name}/${current.cluster}/bin;stopallsrv.sh;"/>
+			</sequential>
+			</parallel>			
+			<echo2 message="停止集群完成"/>    	
+
+
+			
+    	<echo2 message="上传应用..."/>    	
+			<parallel threadCount="8">
+    	<sequential>   	
+			<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd /home/yhweb;rm -rf deploy-tmp;mkdir deploy-tmp"/>
+    	<scp file="${project.dist.dir}/${crm_war_name}.war" todir="${node1.ssh.username}@${node1.ssh.host}:/home/yhweb/deploy-tmp" password="${node1.ssh.password}" trust="true"/>
+			<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd /home/yhweb/${current.name}/${current.cluster}/app;rm -rf *;mv /home/yhweb/deploy-tmp/${crm_war_name}.war .;jar -xf ${crm_war_name}.war;rm -rf ${crm_war_name}.war"/>
+    	<echo2 message="上传应用到node1完成"/>    	
+			</sequential>
+
+    	<sequential>   	
+			<sshexec host="${node2.ssh.host}"	username="${node2.ssh.username}" password="${node2.ssh.password}" trust="true"	command="cd /home/yhweb;rm -rf deploy-tmp;mkdir deploy-tmp"/>
+			<scp file="${project.dist.dir}/${crm_war_name}.war" todir="${node2.ssh.username}@${node2.ssh.host}:/home/yhweb/deploy-tmp" password="${node2.ssh.password}" trust="true"/>
+			<sshexec host="${node2.ssh.host}"	username="${node2.ssh.username}" password="${node2.ssh.password}" trust="true"	command="cd /home/yhweb/${current.name}/${current.cluster}/app;rm -rf *;mv /home/yhweb/deploy-tmp/${crm_war_name}.war .;jar -xf ${crm_war_name}.war;rm -rf ${crm_war_name}.war"/>
+    	<echo2 message="上传应用到node2完成"/>    	
+			</sequential>
+			</parallel>
+			<echo2 message="上传应用完成"/>  
+
+
+    	<echo2 message="启动集群..."/>    
+    	<parallel threadCount="8">	
+    	<sequential>
+			<!--启动node1上的这个集群的部分-->
+    	<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd /home/yhweb/${current.name}/${current.cluster}/bin;startallsrv.sh;"/>
+			</sequential>			
+
+    	<sequential>
+			<!--启动node2上的这个集群的部分-->
+    	<sshexec host="${node2.ssh.host}"	username="${node2.ssh.username}" password="${node2.ssh.password}" trust="true"	command=" cd /home/yhweb/${current.name}/${current.cluster}/bin;startallsrv.sh;"/>
+			</sequential>			
+			</parallel>
+    	<echo2 message="启动集群完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			
+			<echo message="web应用依赖于app应用,确保app应用启动完毕后再进行页面操作"/>
+			
+		</target>
+</project>

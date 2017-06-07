@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-cau" default="show" basedir=".">
+		<target name="show"  description="show">
+			<echo message="cau部署"/>			
+		</target>
+
+		<target name="deploy-cau"  description="deploy-cau">
+			<echo2 message="开始部署cau进程的操作..."/>			
+
+    	<echo2 message="执行发布脚本(${cau_1.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${cau_1.ssh.username}@${cau_1.ssh.host}:/${cau_1.path}/ftpdir" password="${cau_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${cau_1.ssh.username}@${cau_1.ssh.host}:/${cau_1.path}/ftpdir" password="${cau_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_cau_configext.jar" todir="${cau_1.ssh.username}@${cau_1.ssh.host}:/${cau_1.path}/ftpdir" password="${cau_1.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${cau_1.ssh.host}"	port="${cau_1.ssh.port}" username="${cau_1.ssh.username}"  password="${cau_1.ssh.password}" trust="true"	command="cd ${cau_1.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+    	<echo2 message="执行发布脚本(${cau_2.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${cau_2.ssh.username}@${cau_2.ssh.host}:/${cau_2.path}/ftpdir" password="${cau_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${cau_2.ssh.username}@${cau_2.ssh.host}:/${cau_2.path}/ftpdir" password="${cau_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_cau_configext.jar" todir="${cau_2.ssh.username}@${cau_2.ssh.host}:/${cau_2.path}/ftpdir" password="${cau_2.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${cau_2.ssh.host}"	port="${cau_2.ssh.port}" username="${cau_2.ssh.username}"  password="${cau_2.ssh.password}" trust="true"	command="cd ${cau_2.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>			
+
+
+    	<echo2 message="执行发布脚本(${cau_3.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${cau_3.ssh.username}@${cau_3.ssh.host}:/${cau_3.path}/ftpdir" password="${cau_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${cau_3.ssh.username}@${cau_3.ssh.host}:/${cau_3.path}/ftpdir" password="${cau_3.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_cau_configext.jar" todir="${cau_3.ssh.username}@${cau_3.ssh.host}:/${cau_3.path}/ftpdir" password="${cau_3.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${cau_3.ssh.host}"	port="${cau_3.ssh.port}" username="${cau_3.ssh.username}"  password="${cau_3.ssh.password}" trust="true"	command="cd ${cau_3.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+
+
+    	<echo2 message="执行发布脚本(${cau_4.ssh.host})..."/>
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${cau_4.ssh.username}@${cau_4.ssh.host}:/${cau_4.path}/ftpdir" password="${cau_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${cau_4.ssh.username}@${cau_4.ssh.host}:/${cau_4.path}/ftpdir" password="${cau_4.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_cau_configext.jar" todir="${cau_4.ssh.username}@${cau_4.ssh.host}:/${cau_4.path}/ftpdir" password="${cau_4.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${cau_4.ssh.host}"	port="${cau_4.ssh.port}" username="${cau_4.ssh.username}"  password="${cau_4.ssh.password}" trust="true"	command="cd ${cau_4.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>		
+		</target>
+</project>

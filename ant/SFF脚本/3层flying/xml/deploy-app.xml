@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-app" default="deploy-app" basedir=".">
+
+	<target name="deploy-app"  description="deploy-app">
+		<taskdef name="property2" classname="com.ai.appframe2.complex.ant.Property2">
+			<classpath>
+			<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+		<property2 name="node1.ssh.host" name2="${cluster.group.app}.node1.ssh.host" />
+		<property2 name="node1.ssh.port" name2="${cluster.group.app}.node1.ssh.port" />
+		<property2 name="node1.ssh.username" name2="${cluster.group.app}.node1.ssh.username" />
+		<property2 name="node1.ssh.password" name2="${cluster.group.app}.node1.ssh.password" />
+	   
+		
+		    
+		<parallel	threadCount="20">
+			<sequential>		
+				<antcall target="stopC0"></antcall>
+				<antcall target="stopC1"></antcall>
+				<antcall target="stopC2"></antcall>
+			</sequential>		
+		</parallel> 
+
+		    	
+		<parallel threadCount="10">
+			<sequential>   
+				<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~/;rm -rf deploy-tmp;mkdir deploy-tmp"/>
+				<antcall target="uploadC0"></antcall>
+				<antcall target="uploadC1"></antcall>
+				<antcall target="uploadC2"></antcall>				
+			</sequential>   
+		</parallel> 
+			 
+		<parallel threadCount="20">
+			<sequential>   
+				<antcall target="startC0"></antcall>
+				<antcall target="startC1"></antcall>
+				<antcall target="startC2"></antcall>
+			</sequential>   
+		</parallel> 
+
+		<echo message="请验证!"/>
+		<echo message="请验证!"/>
+		<echo message="请验证!"/>
+		<echo message="集群需要启动2分钟时间,请等待2分钟后操作"/>
+		
+	</target>
+		
+	
+	<target name="stopC0" description="停止node1上的c0集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c0/bin;stopallsrv.sh;"/>
+		<echo2 message="停止集群${node1.ssh.host}.${cluster.group.app}-c0..."/>
+	</target>
+	<target name="stopC1" if="scondition1" description="停止node1上的c1集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c1/bin;stopallsrv.sh;"/>
+		<echo2 message="停止集群${node1.ssh.host}.${cluster.group.app}-c1..."/>
+	</target>
+	<target name="stopC2" if="scondition2" description="停止node1上的c2集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c2/bin;stopallsrv.sh;"/>
+		<echo2 message="停止集群${node1.ssh.host}.${cluster.group.app}-c2..."/>
+	</target>
+	
+	
+	<target name="uploadC0" description="上传node1上的c0集群的srv">
+		<scp file="${project.dist.dir}/${ear_name}_0.ear" todir="${node1.ssh.username}@${node1.ssh.host}:~/deploy-tmp" password="${node1.ssh.password}" trust="true"/>
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~/deploy-tmp;rm -rf ~/${cluster.app}/${cluster.group.app}-c0/app/*;cp ${ear_name}_0.ear ~/${cluster.app}/${cluster.group.app}-c0/app/.;cd ~/${cluster.app}/${cluster.group.app}-c0/app/;jar -xf ${ear_name}_0.ear;rm -rf ${ear_name}_0.ear"/>
+		<echo2 message="部署集群${node1.ssh.host}.${cluster.group.app}-c0..."/>
+	</target>
+	<target name="uploadC1" if="scondition1" description="上传node1上的c1集群的srv">
+		<scp file="${project.dist.dir}/config_1.jar" todir="${node1.ssh.username}@${node1.ssh.host}:~/deploy-tmp" password="${node1.ssh.password}" trust="true"/>    	
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~/deploy-tmp;rm -rf config.jar;mv config_1.jar config.jar;cp ${ear_name}_0.ear ${ear_name}_1.ear;jar -uvf ${ear_name}_1.ear config.jar;rm -rf ~/${cluster.app}/${cluster.group.app}-c1/app/*;cp ~/deploy-tmp/${ear_name}_1.ear  ~/${cluster.app}/${cluster.group.app}-c1/app/.;cd ~/${cluster.app}/${cluster.group.app}-c1/app/;jar -xf ${ear_name}_1.ear;rm -rf ${ear_name}_1.ear;"/>
+		<echo2 message="部署集群${node1.ssh.host}.${cluster.group.app}-c1..."/>
+	</target>
+	<target name="uploadC2" if="scondition2" description="上传node1上的c2集群的srv">
+		<scp file="${project.dist.dir}/config_2.jar" todir="${node1.ssh.username}@${node1.ssh.host}:~/deploy-tmp" password="${node1.ssh.password}" trust="true"/>    	
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~/deploy-tmp;rm -rf config.jar;mv config_2.jar config.jar;cp ${ear_name}_0.ear ${ear_name}_2.ear;jar -uvf ${ear_name}_2.ear config.jar;rm -rf ~/${cluster.app}/${cluster.group.app}-c2/app/*;cp ~/deploy-tmp/${ear_name}_2.ear  ~/${cluster.app}/${cluster.group.app}-c2/app/.;cd ~/${cluster.app}/${cluster.group.app}-c2/app/;jar -xf ${ear_name}_2.ear;rm -rf ${ear_name}_2.ear;"/>
+		<echo2 message="部署集群${node1.ssh.host}.${cluster.group.app}-c2..."/>
+	</target>	
+
+	
+	<target name="startC0" description="启动node1上的c0集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c0/bin;startallsrv.sh;"/>
+		<echo2 message="启动集群${node1.ssh.host}.${cluster.group.app}-c0..."/>
+	</target>
+	<target name="startC1" if="scondition1" description="启动node1上的c1集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c1/bin;startallsrv.sh;"/>
+		<echo2 message="启动集群${node1.ssh.host}.${cluster.group.app}-c1..."/>
+	</target>
+	<target name="startC2" if="scondition2" description="启动node1上的c2集群的srv">
+		<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.app}/${cluster.group.app}-c2/bin;startallsrv.sh;"/>
+		<echo2 message="启动集群${node1.ssh.host}.${cluster.group.app}-c2..."/>
+	</target>	
+</project>

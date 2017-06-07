@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2014</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author wusk
+     * @create date  2014-12-03
+     * @version 
+     */
+-->
+
+<project name="common" default="usage" basedir=".">
+
+    <description>common基础构建打包</description>
+   
+    <property environment="env" />
+    <property file="buildnv.properties"/>
+
+    <target name="init" description="">
+    <echo message="基础构建打包呵呵"/>
+
+    </target>
+   
+    <target name="compile" depends="init" description="">
+    	
+			<property name="project_list" value="${project.list}"/>
+			
+    	<ant antfile="build_common.xml" dir="." target="compile"/>
+    	<ant antfile="build_domain.xml" dir="." target="compile"/>
+    	<ant antfile="build_authframe.xml" dir="." target="compile"/>
+    	<ant antfile="build_integrated.xml" dir="." target="compile"/>
+    	<ant antfile="build_saashub.xml" dir="." target="compile"/>
+    	<ant antfile="build_paashub.xml" dir="." target="compile"/>
+    	<!-- <ant antfile="build_platlib.xml" dir="." target="compile"/> -->
+    	<!--ant antfile="build_cep.xml" dir="." target="compile"/-->
+    </target>
+
+    <target name="usage" depends="init" description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

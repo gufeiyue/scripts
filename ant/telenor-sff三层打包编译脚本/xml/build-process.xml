@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="process-jar" default="process-jar" basedir=".">
+
+	<target name="process-jar" description="create process jar">
+		<deltree dir="${pro.tmp.path}/process-lib" />
+		<deltree dir="${pro.tmp.path}/process-config" />
+		<deltree dir="${pro.tmp.path}/process-dist" />
+		<deltree dir="${pro.tmp.path}/process-configext" />
+		
+		<mkdir dir="${pro.tmp.path}/process-lib" />
+		<mkdir dir="${pro.tmp.path}/process-config" />
+		<mkdir dir="${pro.tmp.path}/process-dist" />
+	  <mkdir dir="${pro.tmp.path}/process-configext" />
+
+		
+
+		<copydir src="${pro.svn.lib}" dest="${pro.tmp.path}/process-lib" forceoverwrite="true">
+			<include name="**/*.jar" />
+		</copydir>
+
+		<copydir src="${pro.dest.path}" dest="${pro.tmp.path}/process-lib" forceoverwrite="true">
+			<include name="${project_name}.jar" />
+			<include name="${project_name}_flying.jar" />
+		</copydir>
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/process-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+	<!--	
+		<copydir src="../config/21/runtime-config/crm_exe/config" dest="${pro.tmp.path}/process-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+	-->
+
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/process-configext" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		
+		<copydir src="../config/runtime-config/sff_inter" dest="${pro.tmp.path}/process-configext" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+	
+
+<!--21041019
+		<delete file="${pro.dest.path}/${project_name}_lib.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_lib.jar">
+			<fileset dir="${pro.tmp.path}/process-lib">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+-->
+
+
+		<delete file="${pro.dest.path}/${project_name}_lib.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_lib.jar">
+			<fileset dir="${pro.tmp.path}/process-lib">
+				<include name="*.jar" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/ai">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/apache">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/bfs_new">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/jetty">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/lucene">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/other">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/rule">
+				<include name="*.*" />
+			</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/runtime">
+				<include name="*.*" />
+					</fileset>
+					<fileset dir="${pro.tmp.path}/process-lib/solr">
+				<include name="*.*" />
+					</fileset>
+		</jar>
+
+		<delete file="${pro.dest.path}/${project_name}_config.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_config.jar">
+			<fileset dir="${pro.tmp.path}/process-config">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+
+
+		<delete file="${pro.dest.path}/${project_name}_configext.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_configext.jar">
+			<fileset dir="${pro.tmp.path}/process-configext">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+		<!--cau的特殊配置-->
+		<!-- <delete file="${project.dist.dir}/process_cau_configext.jar" failonerror="false" />
+		<jar jarfile="${project.dist.dir}/process_cau_configext.jar">
+			<fileset dir="${project.conf.cau.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--产品的特殊配置-->
+		<!-- <delete file="${project.dist.dir}/process_product_load_configext.jar" failonerror="false" />
+		<jar jarfile="${project.dist.dir}/process_product_load_configext.jar">
+			<fileset dir="${project.conf.prd.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--接口的特殊配置-->
+		<!-- <delete file="${project.dist.dir}/process_inter_configext.jar" failonerror="false" />
+		<jar jarfile="${project.dist.dir}/process_inter_configext.jar">
+			<fileset dir="${project.conf.in.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--后台执行进程的特殊配置-->
+		<!-- <delete file="${pro.dest.dir}/${project_name}_config.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.dir}/${project_name}_config.jar">
+			<fileset dir="${project.conf.exe.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+	</target>
+</project>

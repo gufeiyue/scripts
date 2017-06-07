@@ -1,0 +1,25 @@
+Buildfile: ../xml/allinone-oss.xml
+
+build-web-no-jspc:
+
+jar-web-config:
+     [echo] build config jar for web application
+   [delete] Deleting directory /home/aideploy/oss_test/tmp/sf/web
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/web/config
+    [unjar] Expanding: /home/aideploy/oss_test/tmp/sf/local/sff_config.jar into /home/aideploy/oss_test/tmp/sf/web/config
+   [delete] Deleting directory /home/aideploy/oss_test/tmp/sf/web/config/com
+     [echo] done!
+
+build-web-no-jspc:
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/web/war/WEB-INF/lib
+    [mkdir] Created dir: /home/aideploy/oss_test/tmp/sf/local/classes/test/inter/action/xml
+     [echo] copy files from html to war... ,exclude .rar .zip .txt !
+     [copy] Copying 3906 files to /home/aideploy/oss_test/tmp/sf/web/war
+     [copy] Copying 116 files to /home/aideploy/oss_test/tmp/sf/web/war/WEB-INF/lib
+     [copy] Copying 814 files to /home/aideploy/oss_test/tmp/sf/web/war/WEB-INF/classes
+     [copy] Copied 423 empty directories to 1 empty directory under /home/aideploy/oss_test/tmp/sf/web/war/WEB-INF/classes
+      [jar] Building jar: /home/aideploy/oss_test/tmp/sf/web/oss_rl.war
+     [copy] Copying 1 file to /home/aideploy/oss_test/dest
+
+BUILD SUCCESSFUL
+Total time: 15 seconds

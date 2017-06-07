@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="crm" default="init" basedir=".">
+
+	<target name="init" description="环境初始化">
+		<taskdef name="echo2" classname="com.ai.appframe2.complex.ant.Echo2">
+			<classpath>
+				<fileset dir="../staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		<taskdef name="property_rc2" classname="com.ai.appframe2.complex.ant.PropertiesRC2Task">
+			<classpath>
+				<fileset dir="../staticlib" includes="appframe_ant_property_rc2.jar"/>
+			</classpath>
+		</taskdef>
+		<property_rc2 file="build.properties"/>
+	
+		<taskdef name="jspc" classname="org.apache.jasper.JspC">
+			<classpath>
+				<!--首先使用tomcatlib下面的jar包,bes的jspc不能使用-->
+				<fileset dir="${project.tomcat.lib.path}" includes="*.jar"/>					
+				<fileset dir="${project.ant.staticlib.path}" includes="*.jar"/>
+				<!--<fileset dir="${project.flying.lib.path}" includes="*.jar"/>-->
+				<fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+				<fileset dir="../svn/crm/lib" includes="**/*.jar"/>
+			</classpath>
+		</taskdef>
+	
+	<echo2 message="开始预编译jsp"/>
+		<!--采用flyingjspc进行jsp预编译-->
+		<jspc validateXml="false" javaEncoding="UTF-8" uriroot="${project.tmp.path}/app-war" addWebXmlMappings="true"  webXmlFragment="${project.tmp.path}/app-war/WEB-INF/generated_web.xml" outputDir="${project.tmp.path}/app-war/WEB-INF/src" failOnError="false" listErrors="true"/>
+
+		<javac srcdir="${project.tmp.path}/app-war/WEB-INF/src" destdir="${project.tmp.path}/app-war/WEB-INF/classes" encoding="UTF-8" debug="on" debuglevel="lines,vars,source" failonerror="true">
+			<classpath>
+				<pathelement path="${project.tmp.path}/app-war/WEB-INF/classes" />
+				<fileset dir="${project.tmp.path}/app-war/WEB-INF/lib" includes="*.jar"/>
+				<fileset dir="${project.tomcat.lib.path}" includes="*.jar"/>
+				<fileset dir="../dist" includes="*.jar"/>
+			</classpath>
+		</javac>
+	  <echo2 message="预编译jsp完成"/>
+		<!--预编译jsp完成-->
+		</target>
+</project>

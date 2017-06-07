@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-web" default="deploy-web" basedir=".">
+
+	<target name="deploy-web"  description="deploy-web">
+		<taskdef name="property2" classname="com.ai.appframe2.complex.ant.Property2">
+			<classpath>
+			<fileset dir="${project.svn.lib}" includes="*.jar"/>
+			</classpath>
+		</taskdef>
+
+
+		<property2 name="node1.ssh.host" name2="${cluster.group.web}.node1.ssh.host" />
+		<property2 name="node1.ssh.port" name2="${cluster.group.web}.node1.ssh.port" />
+		<property2 name="node1.ssh.username" name2="${cluster.group.web}.node1.ssh.username" />
+		<property2 name="node1.ssh.password" name2="${cluster.group.web}.node1.ssh.password" />
+
+			   
+    	<parallel	threadCount="8">    	
+			<sequential>
+				<!--停止node1上的这个集群的srv-->
+				<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.web}/${cluster.group.web}/bin;stopallsrv.sh;"/>
+				<echo2 message="停止集群${node1.ssh.host}.${cluster.group.web}..."/>
+			</sequential>
+        </parallel>   	
+
+			 
+		<parallel threadCount="8">
+			<sequential>   	
+				<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~;rm -rf deploy-tmp;mkdir deploy-tmp"/>
+				<scp file="${project.dist.dir}/${war_name}.war" todir="${node1.ssh.username}@${node1.ssh.host}:~/deploy-tmp" password="${node1.ssh.password}" trust="true"/>
+				<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command="cd ~/${cluster.web}/${cluster.group.web}/app;rm -rf *;mv ~/deploy-tmp/${war_name}.war .;jar -xf ${war_name}.war;rm -rf ${war_name}.war"/>
+				<echo2 message="部署集群${node1.ssh.host}.${cluster.group.web}..."/>
+			</sequential>
+         </parallel> 
+
+ 
+    	<parallel threadCount="8">	
+			<sequential>
+				<!--启动node1上的这个集群的部分-->
+				<sshexec host="${node1.ssh.host}"	username="${node1.ssh.username}" password="${node1.ssh.password}" trust="true"	command=" cd ~/${cluster.web}/${cluster.group.web}/bin;startallsrv.sh;"/>
+				<echo2 message="启动集群${node1.ssh.host}.${cluster.group.web}..."/>
+			</sequential>			
+        </parallel> 
+
+		<echo message="请验证!"/>
+		<echo message="请验证!"/>
+		<echo message="请验证!"/>		
+		<echo message="web应用依赖于app应用,确保app应用启动完毕后再进行页面操作"/>
+			
+		</target>
+</project>

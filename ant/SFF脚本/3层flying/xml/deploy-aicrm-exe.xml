@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="deploy-aicrm-exe" default="show" basedir=".">
+		<target name="show"  description="show">
+			<echo message="aicrm_exe的进程部署"/>			
+		</target>
+
+		<target name="deploy-aicrm-exe"   description="deploy-aicrm-exe">
+			<echo2 message="开始部署aicrm_exe进程的操作..."/>			
+    	
+
+    	<echo2 message="执行发布脚本(${aicrm_exe_1.ssh.host})..."/>    	
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aicrm_exe_1.ssh.username}@${aicrm_exe_1.ssh.host}:/${aicrm_exe_1.path}/ftpdir" password="${aicrm_exe_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aicrm_exe_1.ssh.username}@${aicrm_exe_1.ssh.host}:/${aicrm_exe_1.path}/ftpdir" password="${aicrm_exe_1.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_aicrm_exe_configext.jar" todir="${aicrm_exe_1.ssh.username}@${aicrm_exe_1.ssh.host}:/${aicrm_exe_1.path}/ftpdir" password="${aicrm_exe_1.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aicrm_exe_1.ssh.host}"	port="${aicrm_exe_1.ssh.port}" username="${aicrm_exe_1.ssh.username}"  password="${aicrm_exe_1.ssh.password}" trust="true"	command="cd ${aicrm_exe_1.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+
+
+    	<echo2 message="执行发布脚本(${aicrm_exe_2.ssh.host})..."/>    	
+    	<echo2 message="拷贝文件到服务器..."/>
+    	<scp file="${project.dist.dir}/process_lib.jar" todir="${aicrm_exe_2.ssh.username}@${aicrm_exe_2.ssh.host}:/${aicrm_exe_2.path}/ftpdir" password="${aicrm_exe_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_config.jar" todir="${aicrm_exe_2.ssh.username}@${aicrm_exe_2.ssh.host}:/${aicrm_exe_2.path}/ftpdir" password="${aicrm_exe_2.ssh.password}" trust="true"/>
+    	<scp file="${project.dist.dir}/process_aicrm_exe_configext.jar" todir="${aicrm_exe_2.ssh.username}@${aicrm_exe_2.ssh.host}:/${aicrm_exe_2.path}/ftpdir" password="${aicrm_exe_2.ssh.password}" trust="true"/>
+    	<echo2 message="拷贝文件到服务器完成"/>
+    	
+    	<echo2 message="解压文件..."/>
+      <sshexec host="${aicrm_exe_2.ssh.host}"	port="${aicrm_exe_2.ssh.port}" username="${aicrm_exe_2.ssh.username}"  password="${aicrm_exe_2.ssh.password}" trust="true"	command="cd ${aicrm_exe_2.path}/sbin;./process.sh"/>
+    	<echo2 message="解压文件完成"/>
+
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>
+			<echo message="请验证!"/>			
+		</target>
+</project>

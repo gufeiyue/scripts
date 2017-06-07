@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+     /**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2011</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author Yang Hua
+     * @create date  2011-02-24
+     * @version 8.01
+     */
+     -->
+
+<project name="zjmcc" default="version" basedir=".">
+<target name="version"  description="创建版本信息">
+
+<tstamp prefix="build">
+<format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+</tstamp>
+<echo message="${build.time}" />
+<echo message="${time}" />
+<echo message="${build.TODAY}" />
+<echo message="${build..DSTAMP}" />
+<echo message="${TSTAMP}" />
+<taskdef name="VersionInfo" classname="com.ai.appframe2.complex.ant.VersionInfoTask">
+<classpath>
+<fileset dir="../lib/flyinglib/" includes="*.jar"/>
+<fileset dir="../lib/runtimelib/" includes="*.jar"/>
+<fileset dir="../lib/staticlib/" includes="*.jar"/>
+<fileset dir="../lib/tomcatlib/" includes="*.jar"/>
+<fileset dir="../svn/crm/lib/" includes="*.jar"/>
+<!-- <fileset dir="${project.runtime.lib.path}" includes="*.jar"/>
+     <fileset dir="${project.svn.path}/lib/apache" includes="*.jar"/>
+     <fileset dir="${project.svn.path}/lib/appframe" includes="*.jar"/>
+     <fileset dir="${project.svn.path}/lib/other" includes="*.jar"/>
+     <fileset dir="${project.wls.lib.path}" includes="*.jar"/>
+     <fileset dir="${project.ant.staticlib.path}" includes="*.jar"/> -->
+</classpath>
+</taskdef>
+
+<echo message="版本文件生成到."/>
+<VersionInfo destFile="./version.txt"/>
+</target>
+
+<manifest file="${project.tmp.path}/MANIFEST.MF">
+        <attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+</manifest>
+
+<jar jarfile="${project.tmp.path}/crm_jar_path/${crm_jar_name}.jar" manifest="${project.tmp.path}/MANIFEST.MF">
+	<fileset dir="${project.classes.path}">
+	<include name="**/*.class"/>
+	</fileset>
+</jar>
+
+</project>
+

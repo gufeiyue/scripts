@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+     * create and delpoy ant scripts
+     * usage:  ant
+     * <p>Title: </p>
+     * <p>Description: </p>
+     * <p>Copyright: Copyright (c) 2014</p>
+     * <p>Company: AI(NanJing)</p>
+     * @author wusk
+     * @create date  2014-12-03
+     * @version 
+     */
+-->
+
+<project name="build_domain" default="usage" basedir=".">
+
+    <description>Domain单独域构建打包</description>
+   
+    <property environment="env" />
+    <property file="buildnv.properties"/>
+     <path id="appenginelib.classpath">
+				<fileset dir="${project.appengine.lib.apache}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.appengine}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.other}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.runtime}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.webframe}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.events}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.drools}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.jrules}"  includes="*.jar"/>
+				<fileset dir="${project.appengine.lib.test}"  includes="*.jar"/>
+		</path>
+
+    <target name="init" description="初始化环境">
+    	
+    		<!--foreach 命令使用-->
+    		<property name="ant-contrib.jar" location="../../ant/lib/ant-contrib-1.0b3.jar" />
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${ant-contrib.jar}" />
+
+        <property name="project.common.lib.path" value="${project.dest.dir}/common"/> 
+        
+        <echo message="初始化环境完成"/>
+    </target>
+    
+    <target name="clean-ant-create" depends="init" description="清除临时目录">
+        <echo message="clean tmp dir ..."/>
+        
+				<!--清空单个工程工程生成的ear包的flying_config代码目录-->
+				<deltree dir="${project.tmp.code.path}/${project_name}/flying-config"/>
+				
+				<mkdir dir="${project.tmp.code.path}/${project_name}/flying-src"/>
+				<mkdir dir="${project.tmp.code.path}/${project_name}/flying-classes"/>
+				<mkdir dir="${project.tmp.code.path}/${project_name}/pwf_code"/>
+				<mkdir dir="${project.tmp.code.path}/${project_name}/tmp_pwf"/>
+				
+        <mkdir dir="${project.tmp.code.path}/classes"/>
+        <mkdir dir="${project.tmp.code.path}/classes/${project_name}"/>
+        <mkdir dir="${project.tmp.code.path}/classes/${project_name}/pwf_class"/>
+        
+        <mkdir dir="${project.dest.dir}/${project_name}"/>
+        <mkdir dir="${project.tmp.code.path}/${project_name}/flying-config"/>
+        
+        <mkdir dir="${project.dest.dir}/ear"/>
+        
+        <mkdir dir="${project.tmp.code.path}/domain_info"/>
+
+        <echo message="清除临时目录完成"/>
+    </target>
+    
+    <!-- Step 1 编译domain project 代码 -->
+    <target name="compile_self" depends="clean-ant-create" description="编译java文件">
+
+        <echo message="开始编译java文件..."/>
+        
+        <javac  srcdir="${project.svn.code.path}/${project_name}/src" encoding="utf-8" destdir="${project.classes.path}/${project_name}" debug="true" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+          	<classpath  refid="appenginelib.classpath" />
+            <classpath>
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/><!--依赖于busi_meta.jar busi_meta_cls.jar busi_common.jar-->
+                <!--<fileset dir="${project.tmp.code.path}/all_dest_lib" includes="*.jar"/>-->
+                <fileset dir="${project.dest.dir}/all_dest_lib" includes="*.jar"/>
+                
+            </classpath>
+
+            <!--以下已经打包到meta.jar-->
+            <exclude name="**/abo/**/*.java" />
+            <exclude name="**/vo/**/*.java" />
+            <exclude name="**/ivalues/*.java" />
+            <exclude name="**/bo/**/*.java" />
+            
+            <!--排除集成域的服务-->
+            <exclude name="**/*Intgrt*SV.java" />
+            <!--排除组合服务，非集成组合服务单独放在${project_name}_process.jar-->
+            <exclude name="**/*_AIProcess.java" />
+        </javac>
+        
+        <!--工程域domain本身的jar-->
+        <jar jarfile="${project.dest.dir}/${project_name}/${project_name}.jar" >
+            <fileset dir="${project.classes.path}/${project_name}">
+                <include name="**/*.class"/>
+            </fileset>
+        </jar>
+        
+        <echo message="compile project self success ..."/>
+    </target>
+    
+    <!-- Step 2 编译flyingsv.jar-->
+    <target name="compile_flying_sv" depends="compile_self" description="">
+        
+         <taskdef name="FlyingGenerator" classname="com.ai.appframe2.complex.ant.FlyingGeneratorAntTask">
+          	<classpath  refid="appenginelib.classpath" />
+            <classpath>
+                <!--强制优先搜索crm_app_all的config的目录下的内容,暂时以base工程下的配置文件为准-->
+                <pathelement path="${project.ant.config.path}" />   
+                <pathelement path="${project.ant.config.path}/runtime-config/crm_app/crm_app_all/config" />  
+                <pathelement path="${project.ant.config.path}/runtime-config/crm_app/crm_app_dmsv" />        
+                						
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/><!--引用前边生成的公共服务包-->
+                <fileset dir="${project.dest.dir}/${project_name}" includes="*.jar"/>
+                
+            </classpath>
+        </taskdef>
+        
+        <!--产生使用SV方式的flying-->
+        <FlyingGenerator destPath="${project.tmp.code.path}/${project_name}/flying-src" domainSvFile="${project.tmp.code.path}/domain_info"  vmConfigPath="${project.ant.config.path}" failonerror="false">
+            <fileset dir="${project.classes.path}/${project_name}">
+            		<!--这里只是打包非集成域的服务，在编译时已经过滤集成域服务-->
+                <include name="**/*SV.class" />
+            </fileset>
+        </FlyingGenerator>
+        
+        <!--产生使用配置文件方式的flying-->
+        <FlyingGenerator destPath="${project.tmp.code.path}/${project_name}/flying-src" domainSvFile="${project.tmp.code.path}/domain_info"  vmConfigPath="${project.ant.config.path}" type="file" failonerror="false">
+        </FlyingGenerator>
+       
+        <!--采用搜索jar文件方式生成flying-->
+        <FlyingGenerator destPath="${project.tmp.code.path}/${project_name}/flying-src" domainSvFile="${project.tmp.code.path}/domain_info"  vmConfigPath="${project.ant.config.path}" type="jar" failonerror="false">
+            <fileset dir="${project.appengine.lib.appengine}" includes="*.jar"/>
+            
+        </FlyingGenerator>
+        
+				<copy file="${project.ant.config.path}/flying-config/crm_app/META-INF/flyingserver/startup" tofile="${project.tmp.code.path}/${project_name}/flying-classes/META-INF/flyingserver/startup"/>
+				<copy file="${project.ant.config.path}/flying-config/crm_app/META-INF/flyingserver/web" tofile="${project.tmp.code.path}/${project_name}/flying-classes/META-INF/flyingserver/web"/>
+        
+        <!--编译所有生成的flying.java代码-->
+        <javac srcdir="${project.tmp.code.path}/${project_name}/flying-src" destdir="${project.tmp.code.path}/${project_name}/flying-classes" debug="true" debuglevel="lines,vars,source" nowarn="true">
+            <classpath  refid="appenginelib.classpath" />
+            <classpath>
+                <pathelement path="${project.classes.path}" />
+								
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.dest.dir}/${project_name}" includes="*.jar"/>
+            </classpath>
+
+            <include name="**/*.*"/>
+            <!--这里应该不用排除组合服务的java代码,flying里不应该包含组合服务代码-->
+            <!--exclude name="**/*_AIProcess.java"/-->
+        </javac>
+                    
+    </target>
+    
+    <!-- Step 3 生成flying配置文件，服务注册,注意要生成配置文件，必须先生成flying的代码 -->
+    <target name="genflyingfile" depends="compile_flying_sv" description="">
+   		  
+   		  <taskdef name="FlyingServiceFile" classname="com.ai.appframe2.complex.ant.CreateFlyingServiceFileAntTask">
+	    		<classpath  refid="appenginelib.classpath" />
+	    		<classpath>
+	    			  	<pathelement path="${project.ant.config.path}" />   
+                <pathelement path="${project.ant.config.path}/runtime-config/crm_app/crm_app_all/config" />
+                
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.dest.dir}/${project_name}" includes="*.jar"/>
+            </classpath>
+	  		</taskdef>
+	  		 
+		    <FlyingServiceFile filename="${project.tmp.code.path}/${project_name}/flying-classes/META-INF/flyingserver/services">
+						<fileset dir="${project.tmp.code.path}/${project_name}/flying-src" includes="sv_*.txt"/>
+		    </FlyingServiceFile>
+		    
+		     <jar jarfile="${project.dest.dir}/${project_name}/${project_name}_flysving.jar">
+            <fileset dir="${project.tmp.code.path}/${project_name}/flying-classes">
+                <include name="**/*"/>
+            </fileset>
+        </jar>
+    	
+    </target>
+    
+    <!-- Step 4 编译pwf文件，排除Ingrt-->
+    <target name="compile_pwf" depends="genflyingfile" description="">
+        
+        <tstamp prefix="build.">
+            <format property="time" pattern="yyyy_MM_dd_HH_mm_ss"/>
+        </tstamp>
+                
+        <manifest file="${project.tmp.code.path}/MANIFEST.MF">
+            <attribute name="Build-By" value="Auto Ant Build Time:${build.time}"/>
+        </manifest>
+        
+        <!--只是把源码打包，这里不放到dest里面-->
+        <jar jarfile="${project.tmp.code.path}/${project_name}/tmp_pwf/pwf_src.jar" manifest="${project.tmp.code.path}/MANIFEST.MF">
+            <fileset dir="${project.svn.code.path}/${project_name}/config">
+                <include name="**/*.pwf"/>
+                <exclude name="**/*Intgrt*.pwf"/>
+            </fileset>
+        </jar>
+    
+        <taskdef name="PreCreateProcess" classname="com.ai.appframe2.complex.ant.PreCreateProcessTask">
+           	<classpath  refid="appenginelib.classpath" />
+            <classpath>
+                <!-- user appframe need aiconfig 等配置-->
+                <pathelement path="${project.ant.config.path}/runtime-config/crm_app/crm_app_all/config" />
+                               
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.dest.dir}/${project_name}" includes="*.jar"/>
+                <fileset dir="${project.tmp.code.path}/${project_name}/tmp_pwf" includes="*.jar"/>
+                       
+            </classpath>
+        </taskdef>
+
+        <PreCreateProcess destPath="${project.tmp.code.path}/${project_name}/pwf_code" processEngineImplClassName="com.ai.comframe.vm.processflow.ProcessEnginePreCompileImpl"
+            workflowTemplateClassName="com.ailk.appengine.biz.workflow.template.WorkflowTemplate">
+            <fileset dir="${project.tmp.code.path}/${project_name}/tmp_pwf" />
+        </PreCreateProcess>
+        
+        <javac  srcdir="${project.tmp.code.path}/${project_name}/pwf_code" encoding="utf-8" destdir="${project.classes.path}/${project_name}/pwf_class" debug="true" debuglevel="lines,vars,source" nowarn="true" failonerror="true">
+            <classpath  refid="appenginelib.classpath" />
+            <classpath>
+                <fileset dir="${project.common.lib.path}" includes="*.jar"/>
+                <fileset dir="${project.dest.dir}/${project_name}" includes="*.jar"/>             
+            </classpath>
+
+            <include name="**/*.java" />
+            <!--工程需要修改-暂时不编译pwf文件 -->
+            <!--exclude name="**/*AIProcess.java"/-->
+            
+        </javac>
+        
+        <!--打包process.jar-->
+        <jar jarfile="${project.dest.dir}/${project_name}/${project_name}_process.jar" manifest="${project.tmp.code.path}/MANIFEST.MF">
+            <fileset dir="${project.classes.path}/${project_name}/pwf_class">
+                <include name="**/*.class"/>
+            </fileset>
+        </jar>
+        
+        
+    </target>
+    
+    <!-- 针对单个工程达成EAR包 -->
+    <target name="genear" depends="compile_pwf" description="domain ear 打包">
+    	
+    	  <!--copy当前项目的jar包到all_dest_lib,以便后面集成域的打包使用-->
+    	  <!--<copydir src="${project.dest.dir}/${project_name}" dest="${project.tmp.code.path}/all_dest_lib" forceoverwrite="true">-->
+    	  <copydir src="${project.dest.dir}/${project_name}" dest="${project.dest.dir}/all_dest_lib" forceoverwrite="true">
+    	  	<include name="*.jar"/>	
+    	  </copydir>
+    	  
+    	  <copydir src="${project.dest.dir}/${project_name}" dest="${project.dest.dir}/all_domain_lib" forceoverwrite="true">
+    	  	<include name="${project_name}.jar"/>	
+    	  </copydir>
+    	
+		    <move file="${project.tmp.code.path}/${project_name}/flying-src/sv_class.txt" tofile="${project.tmp.code.path}/${project_name}/flying-config/sv_class.txt"/>
+		    <move file="${project.tmp.code.path}/${project_name}/flying-src/sv_id.txt" tofile="${project.tmp.code.path}/${project_name}/flying-config/sv_id.txt"/>
+		
+		    <!--使用运行时的配置文件覆盖原有的配置文件-->
+		    <!--先使用跨库提交的config覆盖原来的配置文件-->
+		    <copydir src="${project.runtime.config}/crm_app/crm_app_all/config" dest="${project.tmp.code.path}/${project_name}/flying-config" forceoverwrite="true">
+					<include name="**/*.*" />
+				</copydir>
+		
+		    <copydir src="${project.runtime.config}/crm_app/crm_app_domain/domain_${project_name}/config" dest="${project.tmp.code.path}/${project_name}/flying-config" forceoverwrite="true">
+					<include name="**/*.*" />
+				</copydir>
+		
+				<!--将配置文件打包成config.jar包-->
+				<jar jarfile="${project.tmp.code.path}/${project_name}/flying-config/${project_name}_config.jar">
+					<fileset dir="${project.tmp.code.path}/${project_name}/flying-config">
+						<include name="**/*"/>
+		      </fileset>
+				</jar>
+		
+				<!-- 打成ear包 -->
+				<jar jarfile="${project.dest.dir}/ear/${project_name}.ear">
+								
+					<!-- config配置文件 -->
+					<fileset dir="${project.tmp.code.path}/${project_name}/flying-config">
+						<include name="${project_name}_config.jar"/>
+					</fileset>
+					
+					
+					<!--公共common.jar -->
+					<fileset dir="${project.common.lib.path}">
+						<include name="*.jar"/>
+					</fileset>
+					
+		
+					<!--工程本身生成的flying.jar self.jar process.jar-->
+					<fileset dir="${project.dest.dir}/${project_name}">
+						<include name="${project_name}_flysving.jar"/>
+						<include name="${project_name}.jar"/>
+						<include name="${project_name}_process.jar"/>
+					</fileset>
+		
+				</jar>
+  
+    	
+    </target>
+    
+    <!--循环所有工程,编译打包，工程名称有参数传入-->
+    <target name="compile" depends="init"  description="">
+    	<!--loop每个工程，把代码cp到临时目录，这里要用变量替换-->
+        <foreach list="${project.list}" target="genear" param="project_name" delimiter=",">
+        </foreach>		
+    
+    </target>
+    
+
+    <target name="usage" depends="init" description="usage">
+        <echo message="crm create and deploy ant scripts"/>
+        <echo message="************************************"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="***** PLEASE BE CAREFUL USE!!! *****"/>
+        <echo message="************************************"/>
+    </target>
+
+</project>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="process-jar" default="process-jar" basedir=".">
+
+	<target name="process-jar" description="create process jar">
+		<deltree dir="${pro.tmp.path}/process-lib" />
+		<deltree dir="${pro.tmp.path}/process-config" />
+		<deltree dir="${pro.tmp.path}/process-inter" />
+
+		<mkdir dir="${pro.tmp.path}/process-lib" />
+		<mkdir dir="${pro.tmp.path}/process-config" />
+		<mkdir dir="${pro.tmp.path}/process-inter" />
+
+		
+
+		<copydir src="${pro.svn.lib}" dest="${pro.tmp.path}/process-lib" forceoverwrite="true">
+			<include name="**/*.jar" />
+		</copydir>
+
+		<copydir src="${pro.dest.path}" dest="${pro.tmp.path}/process-lib" forceoverwrite="true">
+			<include name="${project_name}.jar" />
+			<include name="${project_name}_flying.jar" />
+		</copydir>
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/process-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		
+		<copydir src="../config/21/runtime-config/${project_name}_exe/config" dest="${pro.tmp.path}/process-config" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+
+
+		<delete file="${pro.dest.path}/${project_name}_21_process_lib.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_21_process_lib.jar">
+			<fileset dir="${pro.tmp.path}/process-lib">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+
+
+		<delete file="${pro.dest.path}/${project_name}_21_process_config.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_21_process_config.jar">
+			<fileset dir="${pro.tmp.path}/process-config">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+		<!--01租户的特殊配置-->
+		<!-- <delete file="${pro.dest.path}/${project_name}_01_process_configext.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.path}/${project_name}_01_process_configext.jar">
+			<fileset dir="${pro.config.path.01}/runtime-config/${project_name}_exe/config">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--cau的特殊配置-->
+		<!-- <delete file="${project.dist.dir}/process_cau_configext.jar" failonerror="false" />
+		<jar jarfile="${project.dist.dir}/process_cau_configext.jar">
+			<fileset dir="${project.conf.cau.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--产品的特殊配置-->
+		<!-- <delete file="${project.dist.dir}/process_product_load_configext.jar" failonerror="false" />
+		<jar jarfile="${project.dist.dir}/process_product_load_configext.jar">
+			<fileset dir="${project.conf.prd.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+		<!--接口的特殊配置-->
+
+		<copydir src="${pro.svn.config}" dest="${pro.tmp.path}/process-inter" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		
+		<copydir src="../config/21/runtime-config/${project_name}_inter/config" dest="${pro.tmp.path}/process-inter" forceoverwrite="true">
+			<include name="**/*.*" />
+		</copydir>
+		<jar jarfile="${pro.dest.path}/${project_name}_21_inter_process_config.jar">
+			<fileset dir="${pro.tmp.path}/process-inter">
+				<include name="**/*.*" />
+			</fileset>
+		</jar>
+
+		<!--后台执行进程的特殊配置-->
+		<!-- <delete file="${pro.dest.dir}/${project_name}_config.jar" failonerror="false" />
+		<jar jarfile="${pro.dest.dir}/${project_name}_config.jar">
+			<fileset dir="${project.conf.exe.config}">
+				<include name="**/*.*" />
+			</fileset>
+		</jar> -->
+
+	</target>
+</project>

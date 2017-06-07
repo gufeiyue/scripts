@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<project name="app" default="app-war" basedir=".">
+
+	<!-- <target name="third-jar"  description="创建第三方需要的jar">
+		<jar jarfile="${crm.dest.path}/${third_jar_name}.jar">
+			<fileset dir="${crm.classes.path}/">
+				<include name="**/third/*.class"/>
+			</fileset>
+		</jar>
+	</target> -->
+
+	<target name="init"  description="创建应用的flying">
+	<taskdef name="FlyingGenerator" classname="com.ai.appframe2.complex.ant.FlyingGeneratorAntTask">
+			<classpath>
+				<!--强制优先搜索crm_app_all的config的目录下的内容-->    			
+				<!-- <pathelement path="../tmp/crm/class" />
+				<pathelement path="../config/crm" />
+				<fileset dir="../lib" includes="**/*.jar"/>
+				<fileset dir="../svn/crm/lib" includes="**/*.jar"/>  -->
+			
+				<pathelement path="../config/crm" />
+				<pathelement path="../tmp/crm/classes" />
+				<pathelement path="../svn/crm/config" />
+				<fileset dir="../lib" includes="**/*.jar"/>
+				<fileset dir="../svn/crm/lib" includes="**/*.jar"/>
+				
+			</classpath>
+		</taskdef>
+		
+		<mkdir dir="../tmp/crm/flying-src"/>
+		<mkdir dir="../tmp/crm/flying-classes/META-INF/flyingserver/"/>
+		<mkdir dir="../tmp/crm/flying-config"/>
+		<mkdir dir="../tmp/crm/app-web"/>
+		<mkdir dir="../tmp/crm/app-web/crm_app_web.war"/>
+
+		<echo message="产生使用SV方式的flying..."/>	<!--产生使用SV方式的flying-->
+		<FlyingGenerator destPath="../tmp/crm/flying-src" vmConfigPath="../config/crm"  failonerror="false">
+			<fileset dir="../tmp/crm/classes">
+				<include name="**/*SV.class" />
+			</fileset>
+			
+		</FlyingGenerator>
+	</target>
+</project>
