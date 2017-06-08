@@ -1,0 +1,11 @@
+- hosts: localadmin
+  remote_user: localadmin
+  sudo: yes
+  sudo_user: root  
+  tasks:
+   - name: ssh-copy
+     authorized_key: user=localadmin key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+
+   - name: sudo-echo
+     shell: echo "localadmin ALL = NOPASSWD:NOPASSWD:ALL" >> /etc/sudoers
+

@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: root
+  sudo: yes
+  sudo_user: root  
+  tasks:
+   - name: ssh-copy
+     authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+
+

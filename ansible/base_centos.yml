@@ -1,0 +1,36 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    zabbix_conf: "/etc/ansible/zabbix_monitor/base/conf/zabbix_agentd.conf"
+    base_script: "/etc/ansible/zabbix_monitor/base/script"
+  tasks:
+#  - name: yum install epel*
+#    command: yum -y install epel*
+
+#  - name: sync zabbix yum repo
+#    copy: src=/etc/ansible/source_files/zabbix.repo dest=/etc/yum.repos.d/zabbix.repo
+
+#  - name: sync zabbix rpm pack
+#    copy: src=/etc/ansible/source_files/zabbix-agent-3.0.5-1.el6.x86_64.rpm dest=/opt/zabbix-agent-3.0.5-1.el6.x86_64.rpm
+
+ # - name: rpm install zabbix-agent
+ #   command: rpm -ivh /opt/zabbix-agent-3.0.5-1.el6.x86_64.rpm
+
+  - name: copy zabbix config file
+    copy: src={{zabbix_conf}} dest=/etc/zabbix/ 
+
+  - name: script directories
+    copy: src={{ base_script }} dest=/etc/zabbix/ 
+
+  - name: configure crontab
+    cron: name="io status" minute="*/1" user="root" job="/etc/zabbix/script/iostat_output.sh"
+
+  - name: mkdir /var/log/zabbix-agent
+    file: path=/var/log/zabbix-agent state=directory owner=root group=root
+
+  - name: mkdir /etc/zabbix/zabbix_agentd.conf.d
+    file: path=/etc/zabbix/zabbix_agentd.conf.d state=directory owner=root group=root
+
+  - name: restart zabbix
+    command: /etc/init.d/zabbix-agent restart

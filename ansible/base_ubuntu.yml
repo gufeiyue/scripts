@@ -1,0 +1,32 @@
+---
+- hosts: '{{ uservar }}' 
+  remote_user: localadmin
+  sudo: yes
+
+  vars:
+    zabbix_conf: "/etc/ansible/zabbix_monitor/base/conf/zabbix_agentd.conf"
+    base_script: "/etc/ansible/zabbix_monitor/base/script"
+    install_name: zabbix-agent
+
+  tasks:
+    - name: install zabbix-agent
+      apt: name={{ install_name }}
+
+    - name: install iostat
+      apt: name=sysstat
+
+    - name: copy zabbix config file
+      copy: src={{ zabbix_conf }} dest=/etc/zabbix/ mode=0644 owner=root group=root
+
+    - name: copy base monitor script
+      copy: src={{ base_script }} dest=/etc/zabbix/ mode=0755 owner=root group=root
+
+    - name: configure crontab
+      cron: name="io status" minute="*/1" user="root" job="/etc/zabbix/script/iostat_output.sh"
+
+
+    - name: configure top connect crontab
+      cron: name="io top connect status" minute="*/1" user="root" job="/etc/zabbix/script/top_connect_status.sh"
+
+    - name: restart zabbix-agent
+      service: name=zabbix-agent state=restarted
