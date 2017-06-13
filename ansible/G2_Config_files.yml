@@ -1,0 +1,94 @@
+---
+- hosts: "{{uservar}}"
+  remote_user: root
+  vars:
+    cfg_dir: "/etc/ansible/source_files/g2_config_files"
+    config_dir: "/JAVA_Files"
+#    config_dir: "/opt"
+
+  tasks:
+#  - name: create config file dir
+#    file: path={{config_dir}} state=directory owner=www-data group=www-data
+
+  - name: copy java config files to remote hosts
+    copy: src={{cfg_dir}}/{{item.coresrc}} dest={{config_dir}}/{{item.coredest}} backup=yes
+    when: name == item.server
+    with_items:
+      - {server: 'STB-G2-USR01', coresrc: 'usr/config_stb/', coredest: 'usr-app/config/'}
+      - {server: 'SIT-G2-USR01', coresrc: 'usr/config_sit/', coredest: 'usr-app/config/'}
+      - {server: 'SIT-BRANCH-TC04', coresrc: 'usr/config_sitb/', coredest: 'usr-app/config/'}
+      - {server: 'PRE-G2-USR01', coresrc: 'usr/config_pre/', coredest: 'usr-app/config/'}
+      - {server: 'G2-INT-USR01', coresrc: 'usr/config_prod/', coredest: 'usr-app/config/'}
+      - {server: 'G2-INT-USR02', coresrc: 'usr/config_prod/', coredest: 'usr-app/config/'}
+      - {server: 'G2-INT-USR03', coresrc: 'usr/config_prod/', coredest: 'usr-app/config/'}
+      - {server: 'G2-INT-USR04', coresrc: 'usr/config_prod/', coredest: 'usr-app/config/'}
+      - {server: 'G2-INT-USR-JOB', coresrc: 'usr/config_prod/', coredest: 'usr-app/config/'}
+      - {server: 'STB-G2-MKT01', coresrc: 'mkt/config_stb/', coredest: 'mkt/config/'}
+      - {server: 'SIT-G2-MKT01', coresrc: 'mkt/config_sit/', coredest: 'mkt/config/'}
+      - {server: 'SIT-BRANCH-TC04', coresrc: 'mkt/config_sitb/', coredest: 'mkt/config/'}
+      - {server: 'PRE-G2-MKT01', coresrc: 'mkt/config_pre/', coredest: 'mkt/config/'}
+      - {server: 'G2-INT-MKT01', coresrc: 'mkt/config_prod/', coredest: 'mkt/config/'}
+      - {server: 'G2-INT-MKT02', coresrc: 'mkt/config_prod/', coredest: 'mkt/config/'}
+      - {server: 'G2-INT-MKT-JOB', coresrc: 'mkt/config_prod/', coredest: 'mkt/config/'}
+      - {server: 'STB-G2-PROD01', coresrc: 'prod/config_stb/', coredest: 'prod/config/'}
+      - {server: 'SIT-G2-PROD01', coresrc: 'prod/config_sit/', coredest: 'prod/config/'}
+      - {server: 'SIT-BRANCH-TC03', coresrc: 'prod/config_sitb/', coredest: 'prod/config/'}
+      - {server: 'PRE-G2-PROD01', coresrc: 'prod/config_pre/', coredest: 'prod/config/'}
+      - {server: 'G2-INT-PROD01', coresrc: 'prod/config_prod/', coredest: 'prod/config/'}
+      - {server: 'G2-INT-PROD02', coresrc: 'prod/config_prod/', coredest: 'prod/config/'}
+      - {server: 'G2-INT-PROD-JOB', coresrc: 'prod/config_prod/', coredest: 'prod/config/'}
+      - {server: 'STB-G2-ACC01', coresrc: 'acc/config_stb/', coredest: 'acc/config/'}
+      - {server: 'SIT-G2-ACC01', coresrc: 'acc/config_sit/', coredest: 'acc/config/'}
+      - {server: 'SIT-BRANCH-TC03', coresrc: 'acc/config_sitb/', coredest: 'acc/config/'}
+      - {server: 'PRE-G2-ACC01', coresrc: 'acc/config_pre/', coredest: 'acc/config/'}
+      - {server: 'G2-INT-ACC01', coresrc: 'acc/config_prod/', coredest: 'acc/config/'}
+      - {server: 'G2-INT-ACC02', coresrc: 'acc/config_prod/', coredest: 'acc/config/'}
+      - {server: 'G2-INT-ACC-JOB', coresrc: 'acc/config_prod/', coredest: 'acc/config/'}
+      - {server: 'STB-G2-INVT01', coresrc: 'invt/config_stb/', coredest: 'invt/config/'}
+      - {server: 'SIT-G2-INVT01', coresrc: 'invt/config_sit/', coredest: 'invt/config/'}
+      - {server: 'SIT-BRANCH-TC03', coresrc: 'invt/config_sitb/', coredest: 'invt/config/'}
+      - {server: 'PRE-G2-INVT01', coresrc: 'invt/config_pre/', coredest: 'invt/config/'}
+      - {server: 'G2-INT-INVT01', coresrc: 'invt/config_prod/', coredest: 'invt/config/'}
+      - {server: 'G2-INT-INVT02', coresrc: 'invt/config_prod/', coredest: 'invt/config/'}
+      - {server: 'G2-INT-INVT-JOB01', coresrc: 'invt/config_prod/', coredest: 'invt/config/'}
+      - {server: 'G2-INT-INVT-JOB02', coresrc: 'invt/config_prod/', coredest: 'invt/config/'}
+      - {server: 'STB-G2-PAY01', coresrc: 'pay/config_stb/', coredest: 'pay/config/'}
+      - {server: 'SIT-G2-PAY01', coresrc: 'pay/config_sit/', coredest: 'pay/config/'}
+      - {server: 'SIT-BRANCH-TC04', coresrc: 'pay/config_sitb/', coredest: 'pay/config/'}
+      - {server: 'PRE-G2-PAY01', coresrc: 'pay/config_pre/', coredest: 'pay/config/'}
+      - {server: 'G2-INT-PAY01', coresrc: 'pay/config_prod/', coredest: 'pay/config/'}
+      - {server: 'G2-INT-PAY02', coresrc: 'pay/config_prod/', coredest: 'pay/config/'}
+      - {server: 'G2-INT-PAY-JOB', coresrc: 'pay/config_prod/', coredest: 'pay/config/'}
+      - {server: 'STB-G2-TRD01', coresrc: 'trd/config_stb/', coredest: 'trd/config/'}
+      - {server: 'SIT-G2-TRD01', coresrc: 'trd/config_sit/', coredest: 'trd/config/'}
+      - {server: 'SIT-BRANCH-TC03', coresrc: 'trd/config_sitb/', coredest: 'trd/config/'}
+      - {server: 'PRE-G2-TRD01', coresrc: 'trd/config_pre/', coredest: 'trd/config/'}
+      - {server: 'G2-INT-TRD01', coresrc: 'trd/config_prod/', coredest: 'trd/config/'}
+      - {server: 'G2-INT-TRD02', coresrc: 'trd/config_prod/', coredest: 'trd/config/'}
+      - {server: 'G2-INT-TRD-JOB', coresrc: 'trd/config_prod/', coredest: 'trd/config/'}
+      - {server: 'STB-G2-LOAN01', coresrc: 'loan/config_stb/', coredest: 'loan/config/'}
+      - {server: 'SIT-G2-LOAN01', coresrc: 'loan/config_sit/', coredest: 'loan/config/'}
+      - {server: 'SIT-BRANCH-TC04', coresrc: 'loan/config_sitb/', coredest: 'loan/config/'}
+      - {server: 'PRE-G2-LOAN01', coresrc: 'loan/config_pre/', coredest: 'loan/config/'}
+      - {server: 'G2-INT-LOAN01', coresrc: 'loan/config_prod/', coredest: 'loan/config/'}
+      - {server: 'G2-INT-LOAN02', coresrc: 'loan/config_prod/', coredest: 'loan/config/'}
+      - {server: 'G2-INT-LOAN-JOB', coresrc: 'loan/config_prod/', coredest: 'loan/config/'}
+      - {server: 'STB-G2-RISK01', coresrc: 'risk/config_stb/', coredest: 'risk/config/'}
+      - {server: 'SIT-G2-RISK01', coresrc: 'risk/config_sit/', coredest: 'risk/config/'}
+      - {server: 'SIT-BRANCH-TC04', coresrc: 'risk/config_sitb/', coredest: 'risk/config/'}
+      - {server: 'PRE-G2-RISK01', coresrc: 'risk/config_pre/', coredest: 'risk/config/'}
+      - {server: 'G2-INT-RISK01', coresrc: 'risk/config_prod/', coredest: 'risk/config/'}
+      - {server: 'G2-INT-RISK02', coresrc: 'risk/config_prod/', coredest: 'risk/config/'}
+#      - {server: 'STB-RISK_front01', coresrc: 'risk-frontal/config_stb/', coredest: 'risk-frontal/config/'}
+#      - {server: 'SIT-RISK_front01', coresrc: 'risk-frontal/config_sit/', coredest: 'risk-frontal/config/'}
+#      - {server: 'PRE-RISK_front01', coresrc: 'risk-frontal/config_pre/', coredest: 'risk-frontal/config/'}
+#      - {server: 'PRD-RISK_front01', coresrc: 'risk-frontal/config_prod/', coredest: 'risk-frontal/config/'}
+#      - {server: 'PRD-RISK_front02', coresrc: 'risk-frontal/config_prod/', coredest: 'risk-frontal/config/'}
+      - {server: 'STB-G2-ACC-FAE01', coresrc: 'acc-fae/config_stb/', coredest: 'acc/config/'}
+      - {server: 'STB-G2-TRD-FAE01', coresrc: 'trd-fae/config_stb/', coredest: 'trd/config/'}
+      - {server: 'SIT-G2-ACC-FAE01', coresrc: 'acc-fae/config_sit/', coredest: 'acc/config/'}
+      - {server: 'SIT-G2-TRD-FAE01', coresrc: 'trd-fae/config_sit/', coredest: 'trd/config/'}
+      - {server: 'PRE-G2-ACC-FAE01', coresrc: 'acc-fae/config_pre/', coredest: 'acc/config/'}
+      - {server: 'G2-INT-TRD-FAE01', coresrc: 'trd-fae/config_prod/', coredest: 'trd/config/'}
+      - {server: 'G2-INT-ACC-FAE01', coresrc: 'acc-fae/config_prod/', coredest: 'acc/config/'}
+      - {server: 'PRE-G2-TRD-FAE01', coresrc: 'trd-fae/config_pre/', coredest: 'trd/config/'}

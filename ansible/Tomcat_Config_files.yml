@@ -1,0 +1,43 @@
+---
+- hosts: "{{uservar}}"
+  remote_user: root
+  vars:
+    cfg_dir: "/etc/ansible/source_files/java_config_files"
+    config_dir: "/JAVA_Files/"
+
+  tasks:
+#  - name: create config file dir
+#    file: path={{config_dir}} state=directory owner=www-data group=www-data
+
+  - name: copy java config files to remote hosts
+    copy: src={{cfg_dir}}/{{item.coresrc}} dest={{config_dir}} backup=yes
+    when: name == item.server
+    with_items:
+      - {server: 'STB-M-API01', coresrc: 'msapi/stb/'}
+      - {server: 'SIT-M-API01', coresrc: 'msapi/sit/'}
+      - {server: 'SIT-BRANCH-TC02', coresrc: 'msapi/sitb/'}
+      - {server: 'PRE-M-API01', coresrc: 'msapi/pre/'}
+      - {server: 'PRD-API01', coresrc: 'msapi/prod/'}
+      - {server: 'PRD-API02', coresrc: 'msapi/prod/'}
+      - {server: 'STB-OPENAPI-API01', coresrc: 'nonoweb/stb/'}
+      - {server: 'SIT-OPENAPI-API01', coresrc: 'nonoweb/sit/'}
+      - {server: 'SIT-BRANCH-TC01', coresrc: 'nonoweb/sitb/'}
+      - {server: 'PRE-OPEN-API01', coresrc: 'nonoweb/pre/'}
+      - {server: 'JV-API01', coresrc: 'nonoweb/prod/'}
+      - {server: 'JV-API02', coresrc: 'nonoweb/prod/'}
+      - {server: 'STB-PAY-API01', coresrc: 'nonopay/stb/'}
+      - {server: 'SIT-PAY-API01', coresrc: 'nonopay/sit/'}
+      - {server: 'SIT-BRANCH-TC01', coresrc: 'nonopay/sitb/'}
+      - {server: 'PRE-PAY-API01', coresrc: 'nonopay/pre/'}
+      - {server: 'PAY-TC01', coresrc: 'nonopay/prod/'}
+      - {server: 'PAY-TC02', coresrc: 'nonopay/prod/'}
+      - {server: 'SIT-CSMFIN', coresrc: 'csmfin/sit/'}
+      - {server: 'SIT-BRANCH-TC02', coresrc: 'csmfin/sitb/'}
+      - {server: 'PRE-CFN01', coresrc: 'csmfin/pre/'}
+      - {server: 'CSM-TC01', coresrc: 'csmfin/prod/'}
+      - {server: 'CSM-TC02', coresrc: 'csmfin/prod/'}
+      - {server: 'UNF-API01', coresrc: 'unifi/prod/'}
+      - {server: 'UNF-API02', coresrc: 'unifi/prod/'}
+      - {server: 'SIT-UNF-TC01', coresrc: 'unifi/sit/'}
+      - {server: 'SIT-BRANCH-TC02', coresrc: 'unifi/sitb/'}
+      - {server: 'PRE-UNF-API01', coresrc: 'unifi/pre/'}
